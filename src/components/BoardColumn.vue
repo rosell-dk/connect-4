@@ -16,7 +16,7 @@ const color = computed(() => {
 
 function onColumnClick() {
     if (!gameStore.gameOver) {
-      gameStore.insertChecker(props.col);      
+      gameStore.insertChecker(props.col);
     }
 }
 
@@ -34,7 +34,8 @@ function onColumnClick() {
 
 <style scoped>
 .board-column {
-    display: block
+    display: block;
+    width: 100px;
 }
 .board-column .next {
   visibility: hidden;
