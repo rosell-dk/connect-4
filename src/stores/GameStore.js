@@ -81,9 +81,10 @@ export const useGameStore = defineStore('GameStore', {
         return num1 + num2 - 1
       }
       if (
-        (same(1, 0) >= this.requiredToWin) ||
-        (same(0, 1) >= this.requiredToWin) ||
-        (same(1, 1) >= this.requiredToWin)
+        (same(1, 0) >= this.requiredToWin) ||   // checks horizontally
+        (same(0, 1) >= this.requiredToWin) ||   // checks vertically
+        (same(1, 1) >= this.requiredToWin) ||   // checks diagonally (45 degrees)
+        (same(1, -1) >= this.requiredToWin)     // checks diagonally (-45 degrees)
       ) {
         this.whoWon = 1
       }
