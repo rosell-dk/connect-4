@@ -55,6 +55,15 @@ export const useGameStore = defineStore('GameStore', {
       }
       return row;
     },
+
+    toggleWhosTurn() {
+      if (this.whosTurn == 1) {
+        this.whosTurn = 2
+      } else {
+        this.whosTurn = 1
+      }
+    },
+
     // insert
     insertChecker(col) {
       let row = this.getNextAvailablePosition(col)
@@ -62,15 +71,11 @@ export const useGameStore = defineStore('GameStore', {
         return false
       }
       this.board[col][row] = this.whosTurn
-      this.history.push(col);
+      this.history.push(col)
 
       this.checkIfWon(col, row)
+      this.toggleWhosTurn()
 
-      if (this.whosTurn == 1) {
-        this.whosTurn = 2
-      } else {
-        this.whosTurn = 1
-      }
       return true
     },
 
@@ -91,6 +96,7 @@ export const useGameStore = defineStore('GameStore', {
       let col = this.history.pop()
       this.removeCheckerAtTopOfCol(col)
       this.whoWon = 0
+      this.toggleWhosTurn()
     },
 
     // Checks if a cell is part of a wining sequence
