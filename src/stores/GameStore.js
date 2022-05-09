@@ -19,11 +19,9 @@ export const useGameStore = defineStore('GameStore', {
       whoWon: 0,
       requiredToWin: 4,    // number of connected required to win
       history: [],
-      debug: {
-
-      }
     }
   },
+  persist: true,
   getters: {
     canUndo: (state) => {
       return (state.history.length > 0)
@@ -125,10 +123,11 @@ export const useGameStore = defineStore('GameStore', {
       ) {
         this.whoWon = 1
       }
+      /*
       this.debug.sameHorizontal = same(1, 0);
       this.debug.sameVertical = same(0, 1);
       this.debug.sameDiagonal1 = same(1, 1);
-      this.debug.sameDiagonal2 = same(1, -1);
+      this.debug.sameDiagonal2 = same(1, -1);*/
     }
   }
 })
