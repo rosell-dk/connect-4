@@ -15,14 +15,16 @@ const color = computed(() => {
 })
 
 function onColumnClick() {
-    gameStore.insertChecker(props.col);
+    if (!gameStore.gameOver) {
+      gameStore.insertChecker(props.col);      
+    }
 }
 
 </script>
 
 <template>
   <div class="board-column" @click="onColumnClick">
-    <svg class="next" viewBox="0 0 100 100">
+    <svg class="next" viewBox="0 0 100 100" v-show="!gameStore.gameOver">
         <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" :fill="color" />
     </svg>
 

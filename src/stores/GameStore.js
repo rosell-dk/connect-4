@@ -18,9 +18,20 @@ export const useGameStore = defineStore('GameStore', {
       whosTurn: 1,
       whoWon: 0,
       requiredToWin: 4,    // number of connected required to win
+      history: [],
+      debug: {
+
+      }
     }
   },
   getters: {
+    canUndo: (state) => {
+      return (state.history.length > 0)
+    },
+    gameOver: (state) => {
+      return (state.whoWon > 0)
+    }
+
   },
   actions: {
     getCellValue(col, row) {
@@ -51,6 +62,7 @@ export const useGameStore = defineStore('GameStore', {
         return false
       }
       this.board[col][row] = this.whosTurn
+      this.history.push(col);
 
       this.checkIfWon(col, row)
 
@@ -60,6 +72,25 @@ export const useGameStore = defineStore('GameStore', {
         this.whosTurn = 1
       }
       return true
+    },
+
+    // remove checker from top of col
+    removeCheckerAtTopOfCol(col) {
+      let row = this.getNextAvailablePosition(col)
+      if (row == 0) {
+        return false
+      }
+      if (row == -1) {
+        row = this.rows;
+      }
+      row--
+      this.board[col][row] = 0
+    },
+
+    undoLastMove() {
+      let col = this.history.pop()
+      this.removeCheckerAtTopOfCol(col)
+      this.whoWon = 0
     },
 
     // Checks if a cell is part of a wining sequence
@@ -88,6 +119,10 @@ export const useGameStore = defineStore('GameStore', {
       ) {
         this.whoWon = 1
       }
+      this.debug.sameHorizontal = same(1, 0);
+      this.debug.sameVertical = same(0, 1);
+      this.debug.sameDiagonal1 = same(1, 1);
+      this.debug.sameDiagonal2 = same(1, -1);
     }
   }
 })

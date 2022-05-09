@@ -14,14 +14,24 @@ const gameStore = useGameStore()
 function onResetClick() {
     gameStore.$reset();
 }
+
+function onUndoClick() {
+    gameStore.undoLastMove();
+}
+
 </script>
 
 <template>
     <div class="action-bar">
-      <button @click="onResetClick">Restart game</button>
+      <p>
+        <button @click="onResetClick">Restart game</button>
+      </p>
+      <p>
+        <button @click="onUndoClick" :disabled="!gameStore.canUndo">Undo last move</button><br>
+      </p>
     </div>
     <div>
-      <div v-if="gameStore.whoWon > 0" class="win-banner">
+      <div v-if="gameStore.gameOver" class="win-banner">
         <div v-if="gameStore.whoWon == 1">
           RED WINS
         </div>
