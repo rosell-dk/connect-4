@@ -121,7 +121,7 @@ export const useGameStore = defineStore('GameStore', {
         (same(1, 1) >= this.requiredToWin) ||   // checks diagonally (45 degrees)
         (same(1, -1) >= this.requiredToWin)     // checks diagonally (-45 degrees)
       ) {
-        this.whoWon = 1
+        this.whoWon = who
       }
       /*
       this.debug.sameHorizontal = same(1, 0);
