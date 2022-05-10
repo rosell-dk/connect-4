@@ -19,6 +19,7 @@ The game should have state persistence and undo functionality
 ### Day 2 (not over yet)
 - Switched to TypeScript
 - Responsive design
+- Fixed coding styles, applying to [the official Vue style guide](https://vuejs.org/style-guide/)
 
 ## Up next
 - Allow control with keyboard too
