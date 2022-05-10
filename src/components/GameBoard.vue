@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
+import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
 import GameBoardColumn from './GameBoardColumn.vue'
 
 const gameStore = useGameStore()
@@ -19,7 +20,7 @@ function insertDisc(columnIndex:number):void {
   }
 }
 
-function keydownEventListener(event:any):void {
+function onKeyDown(event:any):void {
   switch (event.key) {
     case 'ArrowLeft':
       activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
@@ -41,15 +42,6 @@ function keydownEventListener(event:any):void {
     insertDisc(colIndex)
   }
 }
-
-onMounted(function() {
-  window.addEventListener("keydown", keydownEventListener)
-})
-
-onUnmounted(function() {
-  window.removeEventListener("keydown", keydownEventListener)
-})
-
 </script>
 
 <template>
@@ -61,6 +53,7 @@ onUnmounted(function() {
         :columnIndex="columnIndex-1"
         :style="columnStyle"
       />
+      <AppKeyDownEventListener @keydown="onKeyDown"/>
   </div>
 </template>
 
