@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
-import BoardColumn from './BoardColumn.vue'
+import GameBoardColumn from './GameBoardColumn.vue'
 
 /*
 const props = defineProps({
@@ -22,7 +22,12 @@ const columnStyle = computed(() => {
 
 <template>
   <div class="board">
-      <BoardColumn v-for="col in gameStore.cols" :col="col-1" :key="col" :style="columnStyle"/>
+      <GameBoardColumn
+        v-for="col in gameStore.cols"
+        :col="col-1"
+        :key="col"
+        :style="columnStyle"
+      />
   </div>
 </template>
 

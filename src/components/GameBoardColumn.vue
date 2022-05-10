@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
-import BoardCell from './BoardCell.vue'
+import GameBoardColumnCell from './GameBoardColumnCell.vue'
 
 const gameStore = useGameStore()
 
@@ -28,7 +28,12 @@ function onColumnClick() {
         <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" :fill="color" />
     </svg>
 
-    <BoardCell v-for="row in gameStore.rows" :col="col" :row="gameStore.rows-row" :key="row"/>
+    <GameBoardColumnCell
+      v-for="row in gameStore.rows"
+      :col="col"
+      :row="gameStore.rows-row"
+      :key="row"
+    />
   </div>
 </template>
 

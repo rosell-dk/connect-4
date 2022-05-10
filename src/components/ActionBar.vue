@@ -19,7 +19,11 @@ function onUndoClick() {
       <button @click="onResetClick">Restart game</button>
     </p>
     <p>
-      <button @click="onUndoClick" :disabled="!gameStore.canUndo">Undo last move</button><br>
+      <button
+        @click="onUndoClick"
+        :disabled="!gameStore.canUndo">Undo last move
+      </button>
+      <br>
     </p>
   </div>
 </template>
