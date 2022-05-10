@@ -24,6 +24,7 @@ The game should have state persistence and undo functionality
 - Allow control with keyboard too
 - Publish build
 - Upload demo
+- Sass
 
 ## Other ideas
 - Animation
