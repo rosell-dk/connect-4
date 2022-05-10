@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 import GameBoard from './GameBoard.vue'
+import ActionBar from './ActionBar.vue'
 
 const props = defineProps({
   cols: Number,
@@ -10,15 +11,6 @@ const props = defineProps({
 })
 
 const gameStore = useGameStore()
-
-function onResetClick() {
-    gameStore.$reset();
-}
-
-function onUndoClick() {
-    gameStore.undoLastMove();
-}
-
 </script>
 
 <template>
@@ -36,45 +28,25 @@ function onUndoClick() {
             <GameBoard />
         </div>
       </div>
-      <div class="action-bar">
-        <p>
-          <button @click="onResetClick">Restart game</button>
-        </p>
-        <p>
-          <button @click="onUndoClick" :disabled="!gameStore.canUndo">Undo last move</button><br>
-        </p>
-      </div>
+      <ActionBar />
     </div>
 </template>
 
 <style scoped>
-    .connect-game {
-      display: flex;
-    }
-    .board {
-    }
-    .action-bar {
-      width: 200px;
-      text-align: right;
-    }
-    .win-banner {
-      font-size: 30px;
-      font-woight: bold;
-    }
-    @media (max-width: 600px) {
-      .connect-game {
-        /*display: block;*/
-        flex-wrap: wrap;
-      }
-      .action-bar {
-        width: auto;
-      }
-      .action-bar > p {
-        display: inline-block;
-        margin-right: 20px;
-        margin-bottom: 0;
-      }
-
-    }
+.connect-game {
+  display: flex;
+}
+.board {
+}
+.win-banner {
+  font-size: 30px;
+  font-woight: bold;
+}
+@media (max-width: 600px) {
+  .connect-game {
+    /*display: block;*/
+    flex-wrap: wrap;
+  }
+}
 
 </style>
