@@ -57,7 +57,7 @@ onUnmounted(function() {
 
   & .win-banner {
     font-size: 30px;
-    font-woight: bold;
+    font-weight: bold;
   }
 }
 @media (max-width: 600px) {
