@@ -24,15 +24,26 @@ function onColumnClick() {
 
 <template>
   <div class="board-column" @click="onColumnClick">
-    <svg class="next" viewBox="0 0 100 100" v-show="!gameStore.gameOver">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" :fill="color" />
+    <svg
+      v-show="!gameStore.gameOver"
+      class="next"
+      viewBox="0 0 100 100"
+    >
+        <circle
+          :fill="color"
+          cx="50"
+          cy="50"
+          r="40"
+          stroke="black"
+          stroke-width="3"
+        />
     </svg>
 
     <GameBoardColumnCell
       v-for="row in gameStore.rows"
+      :key="row"
       :col="col"
       :row="gameStore.rows-row"
-      :key="row"
     />
   </div>
 </template>
