@@ -24,7 +24,6 @@ The game should have state persistence and undo functionality
 - SCSS instead of CSS
 
 ## Up next
-- Publish build
 - Upload demo
 - API version number (to prevent problems when loading old saved games)
 
