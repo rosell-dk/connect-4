@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import ConnectGame from './components/ConnectGame.vue'
 </script>
 
 <template>
-    <ConnectGame :cols="7" :rows="6"/>
+    <ConnectGame />
 </template>
 
 <style>

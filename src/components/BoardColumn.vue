@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
@@ -7,7 +7,7 @@ import BoardCell from './BoardCell.vue'
 const gameStore = useGameStore()
 
 const props = defineProps({
-  col: Number
+  col: { type: Number, required: true }
 })
 
 const color = computed(() => {
@@ -35,7 +35,7 @@ function onColumnClick() {
 <style scoped>
 .board-column {
     display: block;
-    width: 100px;
+    width: 70px;
 }
 .board-column .next {
   visibility: hidden;

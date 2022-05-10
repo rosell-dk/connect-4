@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 const props = defineProps({
-  col: Number,
-  row: Number
+  col: { type: Number, required: true },
+  row: { type: Number, required: true }
 })
 
 const gameStore = useGameStore()
@@ -25,8 +25,8 @@ const cellColor = computed(() => {
 
 <style scoped>
 .board-cell {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     display: block;
 }
 </style>

@@ -12,13 +12,16 @@ The game should have state persistence and undo functionality
 - Vue 3.2
 - Vite
 - npm
-- Pinia for managing state
+- [Pinia](https://pinia.vuejs.org/) for managing state
 - Single file components, using Composition API and `<script setup>`
+
+
+### Day 2 (ongoing)
+- Switched to TypeScript
 
 ## Up next
 - Responsive
 - Allow control with keyboard too
-- TypeScript rather than Javascript
 - Publish build
 - Upload demo
 

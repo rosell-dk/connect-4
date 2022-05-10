@@ -1,17 +1,27 @@
 import { defineStore } from 'pinia'
 
+interface GameData {
+  cols: number;
+  rows: number;
+  board: any;
+  whosTurn: number;
+  whoWon: number;
+  requiredToWin: number;
+  history: any;
+}
+
 export const useGameStore = defineStore('GameStore', {
   state: () => {
 
     let board = [];
-    let cols = 7;
-    let rows = 6;
+    let cols:number = 7;
+    let rows:number = 6;
 
     for (var c=0; c<cols; c++) {
       //board[c] = new Array(rows)
       board[c] = []
     }
-    return {
+    const data:GameData = {
       cols: cols,
       rows: rows,
       board: board,
@@ -20,6 +30,7 @@ export const useGameStore = defineStore('GameStore', {
       requiredToWin: 4,    // number of connected required to win
       history: [],
     }
+    return data
   },
   persist: true,
   getters: {
@@ -32,7 +43,7 @@ export const useGameStore = defineStore('GameStore', {
 
   },
   actions: {
-    getCellValue(col, row) {
+    getCellValue(col:number, row:number):number {
       if ((col < 0) || (row < 0) || (col>this.cols -1) || (row>this.rows - 1)) {
         return -1
       }
@@ -42,8 +53,9 @@ export const useGameStore = defineStore('GameStore', {
       }
       return val
     },
+
     // return next available position in column, or -1 (if no position is available)
-    getNextAvailablePosition(col) {
+    getNextAvailablePosition(col:number):number {
       let row = 0;
       while (this.getCellValue(col, row) != 0) {
         row++
@@ -54,7 +66,7 @@ export const useGameStore = defineStore('GameStore', {
       return row;
     },
 
-    toggleWhosTurn() {
+    toggleWhosTurn():void {
       if (this.whosTurn == 1) {
         this.whosTurn = 2
       } else {
@@ -62,8 +74,8 @@ export const useGameStore = defineStore('GameStore', {
       }
     },
 
-    // insert
-    insertChecker(col) {
+    // drop disc in column. Returns true on success, false otherwise
+    insertChecker(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
       if (row == -1) {
         return false
@@ -78,7 +90,7 @@ export const useGameStore = defineStore('GameStore', {
     },
 
     // remove checker from top of col
-    removeCheckerAtTopOfCol(col) {
+    removeCheckerAtTopOfCol(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
       if (row == 0) {
         return false
@@ -88,9 +100,10 @@ export const useGameStore = defineStore('GameStore', {
       }
       row--
       this.board[col][row] = 0
+      return true
     },
 
-    undoLastMove() {
+    undoLastMove():void {
       let col = this.history.pop()
       this.removeCheckerAtTopOfCol(col)
       this.whoWon = 0
@@ -98,18 +111,20 @@ export const useGameStore = defineStore('GameStore', {
     },
 
     // Checks if a cell is part of a wining sequence
-    checkIfWon(col, row) {
+    checkIfWon(col:number, row:number):void {
       let who = this.getCellValue(col, row)
       let me = this;
-      function same(dx, dy) {
+
+      // Return the number of connected discs in a direction
+      function same(dx:number, dy:number):number {
         //console.log(dx, dy, col, row, me.getCellValue(col+dx*1, row+dy*1))
         //return 0;
 
-        let num1 = 1
+        let num1:number = 1
         while (me.getCellValue(col+dx*num1, row+dy*num1) == who) {
           num1++
         }
-        let num2 = 1
+        let num2:number = 1
         while (me.getCellValue(col-dx*num2, row-dy*num2) == who) {
           num2++
         }
