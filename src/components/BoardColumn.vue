@@ -35,7 +35,6 @@ function onColumnClick() {
 <style scoped>
 .board-column {
     display: block;
-    width: 70px;
 }
 .board-column .next {
   visibility: hidden;

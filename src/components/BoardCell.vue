@@ -25,8 +25,9 @@ const cellColor = computed(() => {
 
 <style scoped>
 .board-cell {
-    width: 70px;
-    height: 70px;
+    /*width: 70px;
+    height: 70px;*/
+    width: 100%;
     display: block;
 }
 </style>

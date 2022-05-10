@@ -16,11 +16,11 @@ The game should have state persistence and undo functionality
 - Single file components, using Composition API and `<script setup>`
 
 
-### Day 2 (ongoing)
+### Day 2 (not over yet)
 - Switched to TypeScript
+- Responsive design
 
 ## Up next
-- Responsive
 - Allow control with keyboard too
 - Publish build
 - Upload demo

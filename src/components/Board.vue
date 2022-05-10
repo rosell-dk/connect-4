@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 import BoardColumn from './BoardColumn.vue'
@@ -13,18 +13,24 @@ const props = defineProps({
 
 const gameStore = useGameStore()
 
+const columnStyle = computed(() => {
+    return {'width':(100/gameStore.cols) + '%'}
+})
+
 //const state = reactive({});
 </script>
 
 <template>
   <div class="board">
-      <BoardColumn v-for="col in gameStore.cols" :col="col-1"/>
+      <BoardColumn v-for="col in gameStore.cols" :col="col-1" :style="columnStyle"/>
   </div>
 </template>
 
 <style scoped>
 .board {
-  max-width: 6000px;
+  max-width: 600px;
   width: 100%;
+  display: flex;
+
 }
 </style>
