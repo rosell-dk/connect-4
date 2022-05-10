@@ -22,7 +22,7 @@ const columnStyle = computed(() => {
 
 <template>
   <div class="board">
-      <BoardColumn v-for="col in gameStore.cols" :col="col-1" :style="columnStyle"/>
+      <BoardColumn v-for="col in gameStore.cols" :col="col-1" :key="col" :style="columnStyle"/>
   </div>
 </template>
 
