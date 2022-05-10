@@ -16,13 +16,13 @@ The game should have state persistence and undo functionality
 - Single file components, using Composition API and `<script setup>`
 
 
-### Day 2 (not over yet)
+### Day 2 (the day ain't over yet)
 - Switched to TypeScript
 - Responsive design
 - Fixed coding styles, applying to [the official Vue style guide](https://vuejs.org/style-guide/)
+- Drop discs by pressing 1-9 on keyboard (makes it more comfortable to play on the same computer)
 
 ## Up next
-- Allow control with keyboard too
 - Publish build
 - Upload demo
 - Sass
