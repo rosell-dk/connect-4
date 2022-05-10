@@ -37,7 +37,7 @@ const cellColor = computed(() => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .board-cell {
     /*width: 70px;
     height: 70px;*/

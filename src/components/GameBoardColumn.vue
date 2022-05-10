@@ -48,15 +48,16 @@ function onColumnClick() {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .board-column {
     display: block;
-}
-.board-column .next {
-  visibility: hidden;
-}
 
-.board-column:hover .next {
-  visibility: visible;
+    & .next {
+      visibility: hidden;
+    }
+
+    &:hover .next {
+      visibility: visible;
+    }
 }
 </style>

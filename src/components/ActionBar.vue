@@ -28,7 +28,7 @@ function onUndoClick() {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .action-bar {
   width: 200px;
   text-align: right;
@@ -36,11 +36,12 @@ function onUndoClick() {
 @media (max-width: 600px) {
   .action-bar {
     width: auto;
-  }
-  .action-bar > p {
-    display: inline-block;
-    margin-right: 20px;
-    margin-bottom: 0;
+
+    & > p {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 0;
+    }
   }
 }
 </style>

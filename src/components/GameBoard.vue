@@ -9,8 +9,6 @@ const gameStore = useGameStore()
 const columnStyle = computed(() => {
     return {'width':(100/gameStore.dimension.cols) + '%'}
 })
-
-//const state = reactive({});
 </script>
 
 <template>
@@ -24,11 +22,10 @@ const columnStyle = computed(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .board {
   max-width: 600px;
   width: 100%;
   display: flex;
-
 }
 </style>

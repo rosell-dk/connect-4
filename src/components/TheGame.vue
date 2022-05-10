@@ -51,19 +51,17 @@ onUnmounted(function() {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .connect-game {
   display: flex;
-}
-.board {
-}
-.win-banner {
-  font-size: 30px;
-  font-woight: bold;
+
+  & .win-banner {
+    font-size: 30px;
+    font-woight: bold;
+  }
 }
 @media (max-width: 600px) {
   .connect-game {
-    /*display: block;*/
     flex-wrap: wrap;
   }
 }
