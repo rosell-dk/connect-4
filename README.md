@@ -26,6 +26,7 @@ The game should have state persistence and undo functionality
 - Publish build
 - Upload demo
 - Sass
+- API version number (to prevent problems when loading old saved games)
 
 ## Other ideas
 - Animation
