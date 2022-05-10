@@ -7,7 +7,7 @@ The game should have state persistence and undo functionality
 
 ## Log:
 
-### Day 1: Done ;)
+### Day 1: Mission accomplished! :)
 - A working game with state persistence and undo functionality
 - Vue 3.2
 - Vite
@@ -28,6 +28,7 @@ The game should have state persistence and undo functionality
 
 ## Other ideas
 - Animation
+- Redo
 - Save game
 - 3 player game (n player)
 - Play against computer
