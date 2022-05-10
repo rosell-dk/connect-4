@@ -7,7 +7,8 @@ import GameBoardColumnCell from './GameBoardColumnCell.vue'
 const gameStore = useGameStore()
 
 const props = defineProps({
-  columnIndex: { type: Number, required: true }
+  columnIndex: { type: Number, required: true },
+  active: { type: Boolean, required: true },
 })
 
 const color = computed(() => {
@@ -23,7 +24,10 @@ function onColumnClick() {
 </script>
 
 <template>
-  <div class="board-column" @click="onColumnClick">
+  <div
+    @click="onColumnClick"
+    :class="{'board-column':true, 'active-column':active}"
+  >
     <svg
       v-show="!gameStore.gameOver"
       class="next"
@@ -57,6 +61,9 @@ function onColumnClick() {
     }
 
     &:hover .next {
+      visibility: visible;
+    }
+    &.active-column .next {
       visibility: visible;
     }
 }

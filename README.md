@@ -12,15 +12,16 @@ The game should have state persistence and undo functionality
 - Vue 3.2
 - Vite
 - npm
-- [Pinia](https://pinia.vuejs.org/) for managing state
+- [Pinia](https://pinia.vuejs.org/) for managing the global state
 - Single file components, using Composition API and `<script setup>`
 
 
 ### Day 2 (the day ain't over yet)
 - Switched to TypeScript
 - Responsive design
-- Fixed coding styles, applying to [the official Vue style guide](https://vuejs.org/style-guide/)
-- Drop discs by pressing 1-9 on keyboard (makes it more comfortable to play on the same computer)
+- Fixed coding styles, hereby applying to [the official Vue style guide](https://vuejs.org/style-guide/)
+- Play discs by pressing 1-9 on keyboard (makes it more comfortable to play on the same computer)
+- Play discs with keybord arrow keys
 - SCSS instead of CSS
 
 ## Up next

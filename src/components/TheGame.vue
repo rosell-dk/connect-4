@@ -1,34 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
 
 const gameStore = useGameStore()
-
-function insertDisc(columnIndex:number):void {
-  if (!gameStore.gameOver) {
-    gameStore.insertDisc(columnIndex);
-  }
-}
-
-function keydownEventListener(ev:any):void {
-  let digitTest = /^[1-9]$/;
-  if (digitTest.test(ev.key)) {
-    let colIndex = parseInt(ev.key,0) - 1
-    insertDisc(colIndex)
-  }
-}
-
-onMounted(function() {
-  window.addEventListener("keydown", keydownEventListener)
-})
-
-onUnmounted(function() {
-  window.removeEventListener("keydown", keydownEventListener)
-})
-
 
 </script>
 
