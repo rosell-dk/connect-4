@@ -3,11 +3,12 @@ import { defineStore } from 'pinia'
 interface GameData {
   cols: number;
   rows: number;
-  board: any;
+  board: number[][];    // array of columns of rows of numbers
   whosTurn: number;
   whoWon: number;
   requiredToWin: number;
-  history: any;
+  history: number[];    // list of all moves in the game,
+                        // ie [4, 3] meaning that first coin was put in slot 4 and second in slot 3
 }
 
 export const useGameStore = defineStore('GameStore', {
@@ -104,7 +105,10 @@ export const useGameStore = defineStore('GameStore', {
     },
 
     undoLastMove():void {
-      let col = this.history.pop()
+      if (this.history.length == 0) {
+        return
+      }
+      let col:number = (this.history.pop() as number)
       this.removeCheckerAtTopOfCol(col)
       this.whoWon = 0
       this.toggleWhosTurn()
