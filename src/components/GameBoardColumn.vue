@@ -16,7 +16,7 @@ const color = computed(() => {
 
 function onColumnClick() {
     if (!gameStore.gameOver) {
-      gameStore.insertChecker(props.columnIndex);
+      gameStore.insertDisc(props.columnIndex);
     }
 }
 

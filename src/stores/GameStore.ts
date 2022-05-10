@@ -82,7 +82,7 @@ export const useGameStore = defineStore('GameStore', {
     },
 
     // drop disc in column. Returns true on success, false otherwise
-    insertChecker(col:number):boolean {
+    insertDisc(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
       if (row == -1) {
         return false
@@ -96,8 +96,8 @@ export const useGameStore = defineStore('GameStore', {
       return true
     },
 
-    // remove checker from top of col
-    removeCheckerAtTopOfCol(col:number):boolean {
+    // remove disc from top of col
+    removeDiscAtTopOfCol(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
       if (row == 0) {
         return false
@@ -115,7 +115,7 @@ export const useGameStore = defineStore('GameStore', {
         return
       }
       let col:number = (this.history.pop() as number)
-      this.removeCheckerAtTopOfCol(col)
+      this.removeDiscAtTopOfCol(col)
       this.whoWon = 0
       this.toggleWhosTurn()
     },

@@ -9,7 +9,7 @@ const gameStore = useGameStore()
 
 function insertDisc(columnIndex:number):void {
   if (!gameStore.gameOver) {
-    gameStore.insertChecker(columnIndex);
+    gameStore.insertDisc(columnIndex);
   }
 }
 
