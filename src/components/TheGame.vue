@@ -2,7 +2,7 @@
 import { ref, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
-import Board from './Board.vue'
+import GameBoard from './GameBoard.vue'
 
 const props = defineProps({
   cols: Number,
@@ -33,7 +33,7 @@ function onUndoClick() {
           </div>
         </div>
         <div class="board">
-            <Board />
+            <GameBoard />
         </div>
       </div>
       <div class="action-bar">
