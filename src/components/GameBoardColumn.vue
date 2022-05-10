@@ -7,7 +7,7 @@ import GameBoardColumnCell from './GameBoardColumnCell.vue'
 const gameStore = useGameStore()
 
 const props = defineProps({
-  col: { type: Number, required: true }
+  columnIndex: { type: Number, required: true }
 })
 
 const color = computed(() => {
@@ -16,7 +16,7 @@ const color = computed(() => {
 
 function onColumnClick() {
     if (!gameStore.gameOver) {
-      gameStore.insertChecker(props.col);
+      gameStore.insertChecker(props.columnIndex);
     }
 }
 
@@ -40,10 +40,10 @@ function onColumnClick() {
     </svg>
 
     <GameBoardColumnCell
-      v-for="row in gameStore.rows"
-      :key="row"
-      :col="col"
-      :row="gameStore.rows-row"
+      v-for="rowIndex in gameStore.dimension.rows"
+      :key="rowIndex"
+      :columnIndex="columnIndex"
+      :rowIndex="gameStore.dimension.rows - rowIndex"
     />
   </div>
 </template>

@@ -3,14 +3,14 @@ import { ref, computed } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 const props = defineProps({
-  col: { type: Number, required: true },
-  row: { type: Number, required: true }
+  columnIndex: { type: Number, required: true },
+  rowIndex: { type: Number, required: true }
 })
 
 const gameStore = useGameStore()
 
 const cellColor = computed(() => {
-    return ['white', 'red', 'yellow'][gameStore.getCellValue(props.col, props.row)];
+    return ['white', 'red', 'yellow'][gameStore.getCellValue(props.columnIndex, props.rowIndex)];
 })
 </script>
 

@@ -4,17 +4,10 @@ import { useGameStore } from '../stores/GameStore.js'
 
 import GameBoardColumn from './GameBoardColumn.vue'
 
-/*
-const props = defineProps({
-  cols: { type: Number, required: true },
-  rows: { type: Number, required: true }
-})
-*/
-
 const gameStore = useGameStore()
 
 const columnStyle = computed(() => {
-    return {'width':(100/gameStore.cols) + '%'}
+    return {'width':(100/gameStore.dimension.cols) + '%'}
 })
 
 //const state = reactive({});
@@ -23,9 +16,9 @@ const columnStyle = computed(() => {
 <template>
   <div class="board">
       <GameBoardColumn
-        v-for="col in gameStore.cols"
-        :col="col-1"
-        :key="col"
+        v-for="columnIndex in gameStore.dimension.cols"
+        :columnIndex="columnIndex-1"
+        :key="columnIndex"
         :style="columnStyle"
       />
   </div>

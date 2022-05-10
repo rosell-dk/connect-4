@@ -5,11 +5,6 @@ import { useGameStore } from '../stores/GameStore.js'
 import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
 
-const props = defineProps({
-  cols: Number,
-  rows: Number
-})
-
 const gameStore = useGameStore()
 </script>
 

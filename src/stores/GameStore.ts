@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 
-interface GameData {
+interface BoardDimension {
   cols: number;
   rows: number;
-  board: number[][];    // array of columns of rows of numbers
+}
+
+interface GameData {
+  dimension: BoardDimension;
+  board: number[][];    // array of columns of rowCount of numbers
   whosTurn: number;
   whoWon: number;
   requiredToWin: number;
@@ -15,16 +19,18 @@ export const useGameStore = defineStore('GameStore', {
   state: () => {
 
     let board = [];
-    let cols:number = 7;
-    let rows:number = 6;
+    let colCount:number = 7;
+    let rowCount:number = 6;
 
-    for (var c=0; c<cols; c++) {
-      //board[c] = new Array(rows)
+    for (var c=0; c<colCount; c++) {
+      //board[c] = new Array(rowCount)
       board[c] = []
     }
     const data:GameData = {
-      cols: cols,
-      rows: rows,
+      dimension: {
+        cols: colCount,
+        rows: rowCount
+      },
       board: board,
       whosTurn: 1,
       whoWon: 0,
@@ -45,7 +51,7 @@ export const useGameStore = defineStore('GameStore', {
   },
   actions: {
     getCellValue(col:number, row:number):number {
-      if ((col < 0) || (row < 0) || (col>this.cols -1) || (row>this.rows - 1)) {
+      if ((col < 0) || (row < 0) || (col>this.dimension.cols -1) || (row>this.dimension.rows - 1)) {
         return -1
       }
       let val = this.board[col][row]
@@ -60,7 +66,7 @@ export const useGameStore = defineStore('GameStore', {
       let row = 0;
       while (this.getCellValue(col, row) != 0) {
         row++
-        if (row >= this.rows) {
+        if (row >= this.dimension.rows) {
           return -1
         }
       }
@@ -97,7 +103,7 @@ export const useGameStore = defineStore('GameStore', {
         return false
       }
       if (row == -1) {
-        row = this.rows;
+        row = this.dimension.rows;
       }
       row--
       this.board[col][row] = 0
