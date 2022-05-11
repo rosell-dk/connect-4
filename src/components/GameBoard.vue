@@ -52,7 +52,7 @@ function onKeyDown(event:any):void {
 }
 
 // Called when a new disc enters the game
-function onEnter(el:any, b:any) {
+function onDiscEnter(el:any, b:any) {
 
   // For some reason, dynamics.js does not allow animating the cy attribute directly
   // (It results in the following error: "Cannot set property cx of #<SVGCircleElement> which has only a getter")
@@ -76,6 +76,26 @@ function onEnter(el:any, b:any) {
       }
   )
 }
+
+function onDiscLeave(el:any, b:any) {
+
+  let animateThis = reactive({cy:parseInt(el.getAttribute('data-cy'), 10)})
+  watch(animateThis, (a:any) => {
+    el.setAttribute('cy', a.cy)
+  })
+
+  dynamics.animate(
+      animateThis,
+      {
+        cy: -200
+      },
+      {
+        type: dynamics.gravity,
+        duration: 500,
+        bounciness:1
+      }
+  )
+}
 </script>
 
 <template>
@@ -88,7 +108,7 @@ function onEnter(el:any, b:any) {
         <circle
           :cx="50 + 100 * activeColumn"
           :cy="-50"
-          r="40"
+          r="43"
           :fill="gameStore.whosTurn == 1 ? 'red' : 'yellow'"
           stroke="black"
           stroke-width="1"
@@ -100,7 +120,9 @@ function onEnter(el:any, b:any) {
                  disc is created - we use javascript to do the animation.
                  -->
         <TransitionGroup
-          @enter="onEnter"
+          @enter="onDiscEnter"
+          @leave="onDiscLeave"
+          :duration="{ enter: 0, leave: 1000 }"
         >
           <circle
             v-for="disc in gameStore.discs"
@@ -108,7 +130,7 @@ function onEnter(el:any, b:any) {
             :cx="50 + 100 * disc.col"
             cy="0"
             :data-cy="50 + 100 * (gameStore.dimension.rows - 1 - disc.row)"
-            r="40"
+            r="43"
             :fill="(disc.player == 1 ? 'red' : 'yellow')"
             stroke="black"
             stroke-width="1"
@@ -160,12 +182,15 @@ function onEnter(el:any, b:any) {
 </template>
 
 <style scoped lang="scss">
-/*.disc {
-}
-.v-enter-active {
-  transition: transform 0.5s ease;
+
+.v-leave-active {
+  transition: opacity 5s ease;
 }
 
+.v-leave-to {
+  opacity: 0;
+}
+/*
 .v-enter-from {
   transform: translate(0,-200px);
 }
