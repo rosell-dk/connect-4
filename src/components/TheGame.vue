@@ -24,6 +24,11 @@ const gameStore = useGameStore()
         </div>
       </div>
       <ActionBar />
+      <!--
+      <audio autoplay controls>
+        <source src="../assets/sounds/coin-dropped.mp3" type="audio/mpeg">
+      </audio>-->
+
     </div>
 </template>
 

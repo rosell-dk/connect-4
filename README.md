@@ -34,7 +34,7 @@ First of all, the game should be playable on small screens too. It didn't take t
 
 Next, I wanted it to be playable on keyboard too. I implemented two ways to interact. Pressing a number key simply drops the disc in the corresponding slot. Using the right and left arrow keys, you can select a column and then press down arrow to drop it.
 
-### Day 3: Animation
+### Day 3: Animation and sound
 With job specification fulfilled and quality in place, I could now move on to the glazing. First of all, it would be nice to see those discs drop. Actually, this would not only look good, but also make it easier to see what was just played.
 
 The data-model chosen was however not suited for the drop animations. In the model, the discs are just states of cells, which means they cannot easily be tracked, should they move. To remedy this, I decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
@@ -43,6 +43,7 @@ Another thing that needed changing in order to ease animation was the grid. Each
 
 For the animation algorithm, II found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
 
+I also added sounds when discs are dropped and sucked up
 
 ## Other ideas
 - Upload demo
@@ -51,7 +52,7 @@ For the animation algorithm, II found [dynamics.js](http://dynamicsjs.com/), whi
 - Save game
 - 3 player game (n player)
 - Play against computer
-- Replay
+- Watch a replay of the entire game
 - Save the game as SVG animation
 - Game settings: Board size
 - Game settings: Number of players

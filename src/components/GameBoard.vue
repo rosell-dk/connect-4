@@ -75,6 +75,12 @@ function onDiscEnter(el:any, b:any) {
         bounciness:700
       }
   )
+
+  window.setTimeout(() => {
+      var audio = new Audio('/sounds/coin-dropped.mp3');
+      audio.play();
+    }, 200
+  )
 }
 
 function onDiscLeave(el:any, b:any) {
@@ -95,6 +101,12 @@ function onDiscLeave(el:any, b:any) {
         bounciness:1
       }
   )
+  window.setTimeout(() => {
+      var audio = new Audio('/sounds/suck.mp3');
+      audio.play();
+    }, 10
+  )
+
 }
 </script>
 
