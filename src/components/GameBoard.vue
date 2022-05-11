@@ -123,6 +123,7 @@ function onDiscLeave(el:any, b:any) {
           @enter="onDiscEnter"
           @leave="onDiscLeave"
           :duration="{ enter: 0, leave: 1000 }"
+          appear
         >
           <circle
             v-for="disc in gameStore.discs"
