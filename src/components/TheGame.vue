@@ -35,6 +35,7 @@ const gameStore = useGameStore()
 <style scoped lang="scss">
 .connect-game {
   display: flex;
+  max-width: 800px;
 
   & > div:first-child {
     flex-grow: 1;
@@ -48,6 +49,7 @@ const gameStore = useGameStore()
 @media (max-width: 600px) {
   .connect-game {
     flex-wrap: wrap;
+    display: block;
   }
 }
 

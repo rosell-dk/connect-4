@@ -30,7 +30,7 @@ function onUndoClick() {
 
 <style scoped lang="scss">
 .action-bar {
-  width: 200px;
+  width: 160px;
   text-align: right;
 }
 @media (max-width: 600px) {
