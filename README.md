@@ -37,18 +37,16 @@ Next, I wanted it to be playable on keyboard too. I implemented two ways to inte
 ### Day 3: Animation
 With job specification fulfilled and quality in place, I could now move on to the glazing. First of all, it would be nice to see those discs drop. Actually, this would not only look good, but also make it easier to see what was just played.
 
-The data-model chosen was however not suited for the drop animations. The discs are just states of cells in the data model, which means they cannot easily be tracked, should they move. I therefore decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
+The data-model chosen was however not suited for the drop animations. In the model, the discs are just states of cells, which means they cannot easily be tracked, should they move. To remedy this, I decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
 
-Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. I could keep the grid and implement the discs in another layer, but found it better to have the entire board in one SVG.
+Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. If discs are to move from cell to cell, they cannot be part of such a solution. I had the alternatives of either implementing the discs in another layer or merge the cells in the column. I chose the latter. In fact, I merged all the cells. Doing this prevents future problems if animations needs to cross column borders.
 
-For the animation, I found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
+For the animation algorithm, II found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
 
-## Up next
-- Upload demo
-- API version number (to prevent problems when loading old saved games)
 
 ## Other ideas
-- Animation
+- Upload demo
+- API version number (to prevent problems when loading old saved games)
 - Redo
 - Save game
 - 3 player game (n player)
@@ -62,3 +60,4 @@ For the animation, I found [dynamics.js](http://dynamicsjs.com/), which produces
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
 - Docker
+- Sound effects
