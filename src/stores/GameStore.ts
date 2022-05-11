@@ -47,7 +47,7 @@ export const useGameStore = defineStore('GameStore', {
     }
     return data
   },
-  //persist: true,
+  persist: true,
   getters: {
     canUndo: (state) => {
       return (state.history.length > 0)
