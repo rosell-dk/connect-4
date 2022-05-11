@@ -5,9 +5,16 @@ interface BoardDimension {
   rows: number;
 }
 
+interface Disc {
+  row: number;     // the row position (0 = bottom)
+  col: number;     // the column position (0 = left)
+  player: number;  // the player index (1 = player 1)
+}
+
 interface GameData {
   dimension: BoardDimension;
   board: number[][];    // array of columns of rowCount of numbers
+  discs: Disc[];
   whosTurn: number;
   whoWon: number;
   requiredToWin: number;
@@ -32,6 +39,7 @@ export const useGameStore = defineStore('GameStore', {
         rows: rowCount
       },
       board: board,
+      discs: [],
       whosTurn: 1,
       whoWon: 0,
       requiredToWin: 4,    // number of connected required to win
@@ -39,7 +47,7 @@ export const useGameStore = defineStore('GameStore', {
     }
     return data
   },
-  persist: true,
+  //persist: true,
   getters: {
     canUndo: (state) => {
       return (state.history.length > 0)
@@ -88,6 +96,7 @@ export const useGameStore = defineStore('GameStore', {
         return false
       }
       this.board[col][row] = this.whosTurn
+      this.discs.push({row:row, col:col, player:this.whosTurn});
       this.history.push(col)
 
       this.checkIfWon(col, row)
@@ -114,6 +123,7 @@ export const useGameStore = defineStore('GameStore', {
       if (this.history.length == 0) {
         return
       }
+      this.discs.pop()
       let col:number = (this.history.pop() as number)
       this.removeDiscAtTopOfCol(col)
       this.whoWon = 0

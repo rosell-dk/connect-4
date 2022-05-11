@@ -8,21 +8,38 @@ The game should have state persistence and undo functionality
 ## Log:
 
 ### Day 1: Mission accomplished! :)
-- A working game with state persistence and undo functionality
-- Vue 3.2
-- Vite
-- npm
-- [Pinia](https://pinia.vuejs.org/) for managing the global state
-- Single file components, using Composition API and `<script setup>`
+The first day, I just focused on getting the job done.
+And actually, I managed to get a fully functional game up and running with state persistence and *undo* functionality.
 
+I used vite to get quickly up and running. The new Composition API and `<script setup>` was new to me, so I read up on it. Very nice additions to Vue! - I opted in! A project like this needs a global data model. I thought Vuex, but discovered [Pinia](https://pinia.vuejs.org/).
 
-### Day 2 (the day ain't over yet)
-- Switched to TypeScript
-- Responsive design
-- Fixed coding styles, hereby applying to [the official Vue style guide](https://vuejs.org/style-guide/)
-- Play discs by pressing 1-9 on keyboard (makes it more comfortable to play on the same computer)
-- Play discs with keybord arrow keys
-- SCSS instead of CSS
+The implementation is very simple. The main data structure is an array of columns of cell states (0 = no disc, 1 = player 1 disc, etc). This is easily converted to a visual representation. Reactivity keeps it updated. The data structure also allows quickly accessing columns and cells, which is needed for determining if the game is won.
+The method for determining if the game is won is to examine the discs next to the piece just played.
+
+For state persistence, I simply used the "persist" feature of Pinia.
+The *undo* functionality was implemented by maintaining a history of moves. Ie [4,2] would mean that the first disc was placed in column 4 and the second was placed in column 2. Removing a disc translates into popping the column index from history and removing the disc on the top of that row.
+
+### Day 2: Quality
+Having a working game allowed me to turn to the quality. Quality of code and quality of the UI
+
+*Code quality*
+First thing I wanted was to do was switch to TypeScript. There are [plenty of good reasons to use Typescript](https://serokell.io/blog/why-typescript). So why didn't I start out with TypeScript? Well, I hadn't used it before, and wanted the piece of mind of having the job done. With that out of the way already, there should be plenty of time to learn TypeScript. Actually, it was quite quick to learn and also pretty quick to implement. For testing, I went with [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker), which performs the checks during development, which is nice.
+
+Next, I turned to the coding style. I needed a brush-up of the recommendations and wanted to get it right early, to avoid needing to change stuff. After that, the code applies to [the official Vue style guide](https://vuejs.org/style-guide/)
+
+Finally, I changed the CSS to SCSS. SCSS is more readable and easier to maintain.
+
+*UI quality*
+First of all, the game should be playable on small screens too. It didn't take too many media queries to make that happen.
+
+Next, I wanted it to be playable on keyboard too. I implemented two ways to interact. Pressing a number key simply drops the disc in the corresponding slot. Using the right and left arrow keys, you can select a column and then press down arrow to drop it.
+
+### Day 3: Animation
+With job specification fulfilled and quality in place, I could now move on to the glazing. First of all, it would be nice to see those discs drop. Actually, this would not only look good, but also make it easier to see what was just played.
+
+The data-model chosen was however not suited for the drop animations. The discs are just states of cells in the data model, which means they cannot easily be tracked, should they move. I therefore decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
+
+Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. I could keep the grid and implement the discs in another layer, but found it better to have the entire board in one SVG. 
 
 ## Up next
 - Upload demo

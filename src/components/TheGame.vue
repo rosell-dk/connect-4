@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 
 import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
 
 const gameStore = useGameStore()
-
 </script>
 
 <template>
@@ -20,8 +19,8 @@ const gameStore = useGameStore()
             YELLOW WINS
           </div>
         </div>
-        <div class="board">
-            <GameBoard />
+        <div class="board-container">
+          <GameBoard />
         </div>
       </div>
       <ActionBar />
@@ -31,6 +30,10 @@ const gameStore = useGameStore()
 <style scoped lang="scss">
 .connect-game {
   display: flex;
+
+  & > div:first-child {
+    flex-grow: 1;
+  }
 
   & .win-banner {
     font-size: 30px;
