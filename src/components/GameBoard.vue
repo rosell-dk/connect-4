@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
+import dynamics from 'dynamics.js'
 
 import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
 
@@ -8,6 +9,8 @@ const gameStore = useGameStore()
 
 //const activeColumn = ref(Math.floor((gameStore.dimension.cols+1)/2))
 const activeColumn = ref(-1)   // start outside board
+
+const show = ref(true)
 
 const columnStyle = computed(() => {
     return {'width':(100/gameStore.dimension.cols) + '%'}
@@ -18,6 +21,12 @@ function insertDisc(columnIndex:number):void {
     gameStore.insertDisc(columnIndex);
   }
 }
+
+/*
+watch(gameStore.discs, () => {
+  console.log('hello')
+})*/
+
 
 function onKeyDown(event:any):void {
   switch (event.key) {
@@ -37,18 +46,41 @@ function onKeyDown(event:any):void {
   // Pressing digit drops it on the corresponding slot
   let digitTest = /^[1-9]$/;
   if (digitTest.test(event.key)) {
-    let colIndex = parseInt(event.key,0) - 1
+    let colIndex = parseInt(event.key, 10) - 1
     insertDisc(colIndex)
   }
 }
 
-function onHover() {
-  console.log('hover!')
+// Called when a new disc enters the game
+function onEnter(el:any, b:any) {
+
+  // For some reason, dynamics.js does not allow animating the cy attribute directly
+  // (It results in the following error: "Cannot set property cx of #<SVGCircleElement> which has only a getter")
+  // So, as a workaround, we let dynamics.js animate a reactive variable, which we watch, so
+  // we can call "setAttribute" ourselves
+
+  let animateThis = reactive({cy:0})
+  watch(animateThis, (a:any) => {
+    el.setAttribute('cy', a.cy)
+  })
+
+  dynamics.animate(
+      animateThis,
+      {
+        cy: parseInt(el.getAttribute('data-cy'), 10)
+      },
+      {
+        type: dynamics.gravity,
+        duration: 700,
+        bounciness:700
+      }
+  )
 }
 </script>
 
 <template>
-  <div class="board">
+  <div class="game-board">
+    <div class="game-board-actual">
       <svg
         :viewBox="'0 -100 ' + (100 * gameStore.dimension.cols) + ' ' + (100 * gameStore.dimension.rows + 100)"
       >
@@ -64,15 +96,25 @@ function onHover() {
         />
 
         <!-- discs -->
-        <circle
-          v-for="disc in gameStore.discs"
-          :cx="50 + 100 * disc.col"
-          :cy="50 + 100 * (gameStore.dimension.rows - 1 - disc.row)"
-          r="40"
-          :fill="(disc.player == 1 ? 'red' : 'yellow')"
-          stroke="black"
-          stroke-width="1"
-        />
+        <!-- PS: The TransitionGroup is only used in order to get the onEnter event when a
+                 disc is created - we use javascript to do the animation.
+                 -->
+        <TransitionGroup
+          @enter="onEnter"
+        >
+          <circle
+            v-for="disc in gameStore.discs"
+            :key="disc.col*100+disc.row"
+            :cx="50 + 100 * disc.col"
+            cy="0"
+            :data-cy="50 + 100 * (gameStore.dimension.rows - 1 - disc.row)"
+            r="40"
+            :fill="(disc.player == 1 ? 'red' : 'yellow')"
+            stroke="black"
+            stroke-width="1"
+            class="disc"
+          />
+        </TransitionGroup>
         <defs>
           <mask id="wholes">
             <!-- white pixels makes visible -->
@@ -112,35 +154,53 @@ function onHover() {
           :class="(activeColumn == colIndex-1 ? 'active-column' : '')"
         />
       </div>
-      <AppKeyDownEventListener @keydown="onKeyDown"/>
+    </div>
+    <AppKeyDownEventListener @keydown="onKeyDown"/>
   </div>
 </template>
 
 <style scoped lang="scss">
-.board {
+/*.disc {
+}
+.v-enter-active {
+  transition: transform 0.5s ease;
+}
+
+.v-enter-from {
+  transform: translate(0,-200px);
+}
+.v-enter-to {
+  transform: translate(0,0);
+}*/
+
+.game-board {
   max-width: 600px;
   width: 100%;
-  position: relative;
 
-  .board-svg {
-    width: 100%;
+  .game-board-actual {
+    position: relative;
+
+    .board-svg {
+      width: 100%;
+    }
+
+    .column-hover-sensor {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      div {
+        height: 100%;
+        display: inline-block;
+      }
+      div.active-column {
+        background-color: white;
+        opacity: 30%;
+      }
+    }
   }
 
-  .column-hover-sensor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    div {
-      height: 100%;
-      display: inline-block;
-    }
-    div.active-column {
-      background-color: white;
-      opacity: 30%;
-    }
-  }
 }
 </style>

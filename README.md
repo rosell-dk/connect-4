@@ -39,7 +39,9 @@ With job specification fulfilled and quality in place, I could now move on to th
 
 The data-model chosen was however not suited for the drop animations. The discs are just states of cells in the data model, which means they cannot easily be tracked, should they move. I therefore decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
 
-Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. I could keep the grid and implement the discs in another layer, but found it better to have the entire board in one SVG. 
+Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. I could keep the grid and implement the discs in another layer, but found it better to have the entire board in one SVG.
+
+For the animation, I found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
 
 ## Up next
 - Upload demo
