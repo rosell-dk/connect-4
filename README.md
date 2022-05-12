@@ -56,9 +56,12 @@ These sounds could easily be recorded by myself. But they could probably also ea
 
 ### Day 4:
 - Don't show game interactions when game is over
-
+- Don't play sounds until user interacted with the page
+- Shortcut for undo: Arrow Up
 
 ## Other ideas
+- Mute sound
+- Too much sound when all discs are sucked up
 - Mark the winning connection (ie by blinking)
 - Upload demo
 - API version number (to prevent problems when loading old saved games)

@@ -46,6 +46,9 @@ function onKeyDown(event:any):void {
         insertDisc(activeColumn.value)
       }
       break
+    case 'ArrowUp':
+      gameStore.undoLastMove();
+      break
   }
 
   // Pressing digit drops it on the corresponding slot
@@ -133,7 +136,15 @@ function onDiscLeave(el:any, b:any) {
           stroke="black"
           stroke-width="1"
           v-if="gameStore.gameActive"
-        />
+        >
+          <!--<animate
+            attributeType="XML"
+            attributeName="fill"
+            values="#800;#f00;#800;#800"
+            dur="0.8s"
+            repeatCount="indefinite"
+          />-->
+        </circle>
 
         <!-- discs -->
         <!-- PS: The TransitionGroup is only used in order to get the onEnter event when a
@@ -155,8 +166,7 @@ function onDiscLeave(el:any, b:any) {
             :fill="(disc.player == 1 ? 'red' : 'yellow')"
             stroke="black"
             stroke-width="1"
-            class="disc"
-          />
+            class="disc" />
         </TransitionGroup>
         <defs>
           <mask id="wholes">
