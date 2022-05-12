@@ -49,6 +49,9 @@ function onKeyDown(event:any):void {
     case 'ArrowUp':
       gameStore.undoLastMove();
       break
+    case 'm':
+      gameStore.muted = !gameStore.muted;
+      break
   }
 
   // Pressing digit drops it on the corresponding slot
@@ -84,7 +87,7 @@ function onDiscEnter(el:any, b:any) {
       }
   )
 
-  if (userInteractedWithPage.value) {
+  if ((userInteractedWithPage.value) && (!gameStore.muted)) {
     window.setTimeout(() => {
         var audio = new Audio('/sounds/coin-dropped.mp3');
         audio.play();
@@ -112,12 +115,13 @@ function onDiscLeave(el:any, b:any) {
         bounciness:1
       }
   )
-  window.setTimeout(() => {
-      var audio = new Audio('/sounds/suck.mp3');
-      audio.play();
-    }, 10
-  )
-
+  if ((userInteractedWithPage.value) && (!gameStore.muted)) {
+    window.setTimeout(() => {
+        var audio = new Audio('/sounds/suck.mp3');
+        audio.play();
+      }, 10
+    )
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
-
+import MuteButton from './MuteButton.vue'
 const gameStore = useGameStore()
 
 function onResetClick() {
@@ -15,6 +15,7 @@ function onUndoClick() {
 
 <template>
   <div class="action-bar">
+    <MuteButton v-model="gameStore.muted"/>
     <p>
       <button @click="onResetClick">Restart game</button>
     </p>

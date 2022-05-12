@@ -11,7 +11,7 @@ The game should have state persistence and undo functionality
 The first day, I just focused on getting the job done.
 And actually, I managed to get a fully functional game up and running with state persistence and *undo* functionality.
 
-I used vite to get quickly up and running. The new Composition API and `<script setup>` was new to me, so I read up on it. Very nice additions to Vue! - I opted in! A project like this needs a global data model. I thought Vuex, but discovered [Pinia](https://pinia.vuejs.org/).
+I used vite to get quickly up and running. The new Composition API and [<script setup>](https://vuejs.org/api/sfc-script-setup.html) was new to me, so I read up on it. Very nice additions to Vue! - I opted in! A project like this needs a global data model. I thought Vuex, but discovered [Pinia](https://pinia.vuejs.org/).
 
 The implementation is very simple. The main data structure is an array of columns of cell states (0 = no disc, 1 = player 1 disc, etc). This is easily converted to a visual representation. Reactivity keeps it updated. The data structure also allows quickly accessing columns and cells, which is needed for determining if the game is won.
 The method for determining if the game is won is to examine the discs next to the piece just played.
@@ -58,9 +58,9 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Don't show game interactions when game is over
 - Don't play sounds until user interacted with the page
 - Shortcut for undo: Arrow Up
+- Mute / unmute
 
 ## Other ideas
-- Mute sound
 - Too much sound when all discs are sucked up
 - Mark the winning connection (ie by blinking)
 - Upload demo
@@ -80,4 +80,4 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Docker
 - More sound effects:
   - When user tries to play a piece, but the slot is full
-  - When the game is won
+  - Play a fanfare when the game is won

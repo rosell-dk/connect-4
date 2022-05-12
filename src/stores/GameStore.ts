@@ -18,6 +18,7 @@ interface GameData {
   whosTurn: number;
   whoWon: number;
   requiredToWin: number;
+  muted: boolean;
   history: number[];    // list of all moves in the game,
                         // ie [4, 3] meaning that first coin was put in slot 4 and second in slot 3
 }
@@ -43,6 +44,7 @@ export const useGameStore = defineStore('GameStore', {
       whosTurn: 1,
       whoWon: 0,
       requiredToWin: 4,    // number of connected required to win
+      muted: false,
       history: [],
     }
     return data
