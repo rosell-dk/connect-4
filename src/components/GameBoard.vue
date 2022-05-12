@@ -3,9 +3,10 @@ import { ref, computed, watch, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 import dynamics from 'dynamics.js'
 
-import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
+//import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
 
 import { useInteractedWithPage } from '../classes/interactedWithPage.js'
+import { useEventListener } from '@vueuse/core'
 
 const gameStore = useGameStore()
 
@@ -31,9 +32,7 @@ watch(gameStore.discs, () => {
   console.log('hello')
 })*/
 
-
-function onKeyDown(event:any):void {
-
+useEventListener(document, 'keydown', (event) => {
   switch (event.key) {
     case 'ArrowLeft':
       activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
@@ -60,7 +59,7 @@ function onKeyDown(event:any):void {
     let colIndex = parseInt(event.key, 10) - 1
     insertDisc(colIndex)
   }
-}
+})
 
 // Called when a new disc enters the game
 function onDiscEnter(el:any, b:any) {
@@ -215,7 +214,7 @@ function onDiscLeave(el:any, b:any) {
         />
       </div>
     </div>
-    <AppKeyDownEventListener @keydown="onKeyDown"/>
+    <!--<AppKeyDownEventListener @keydown="onKeyDown"/>-->
   </div>
 </template>
 

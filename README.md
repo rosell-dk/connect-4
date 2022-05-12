@@ -54,12 +54,18 @@ Sound is also part of the user experience. In the real world, things makes sound
 
 These sounds could easily be recorded by myself. But they could probably also easily be found on the net. I googled up open source sound effect libraries and found a good bump sound by searching for "coin fall". It was harder to find a good suck-up sound, but after a while, I found a good quality sound called [Air Lock](https://freesound.org/people/VlatkoBlazek/sounds/185761/), which I imagined would work if played backwards. I reversed it and speeded it a bit up, and it became very close to what I had imagined.
 
-### Day 4:
+### Day 4: Misc improvements
+*New functionality*
+- Mute / unmute
+
+*UI*
 - Don't show game interactions when game is over
 - Don't play sounds until user interacted with the page
 - Shortcut for undo: Arrow Up
-- Mute / unmute
+
+*Code quality*
 - Refactored code for checking if user interacted with the page into a [composable](https://vuejs.org/guide/reusability/composables.html)
+- Refactured code for hooking into keyboard event into using [useEventListener composable](https://vueuse.org/core/useEventListener/) from vueuse.org
 
 ## Other ideas
 - Too much sound when all discs are sucked up
