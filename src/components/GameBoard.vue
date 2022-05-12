@@ -4,11 +4,14 @@ import { useGameStore } from '../stores/GameStore.js'
 import dynamics from 'dynamics.js'
 
 import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
+import AppMouseDownEventListener from './AppMouseDownEventListener.vue'
 
 const gameStore = useGameStore()
 
 //const activeColumn = ref(Math.floor((gameStore.dimension.cols+1)/2))
 const activeColumn = ref(-1)   // start outside board
+
+const userInteractedWithPage = ref(false)  // only play sounds when user has interacted
 
 const show = ref(true)
 
@@ -29,6 +32,8 @@ watch(gameStore.discs, () => {
 
 
 function onKeyDown(event:any):void {
+  userInteractedWithPage.value = true;
+
   switch (event.key) {
     case 'ArrowLeft':
       activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
@@ -76,11 +81,14 @@ function onDiscEnter(el:any, b:any) {
       }
   )
 
-  window.setTimeout(() => {
-      var audio = new Audio('/sounds/coin-dropped.mp3');
-      audio.play();
-    }, 200
-  )
+  if (userInteractedWithPage.value) {
+    window.setTimeout(() => {
+        var audio = new Audio('/sounds/coin-dropped.mp3');
+        audio.play();
+      }, 200
+    )
+
+  }
 }
 
 function onDiscLeave(el:any, b:any) {
@@ -194,6 +202,7 @@ function onDiscLeave(el:any, b:any) {
       </div>
     </div>
     <AppKeyDownEventListener @keydown="onKeyDown"/>
+    <AppMouseDownEventListener @mousedown="userInteractedWithPage = true"/>
   </div>
 </template>
 
