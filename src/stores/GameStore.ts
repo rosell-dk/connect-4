@@ -54,7 +54,10 @@ export const useGameStore = defineStore('GameStore', {
     },
     gameOver: (state) => {
       return (state.whoWon > 0)
-    }
+    },
+    gameActive: (state) => {
+      return (state.whoWon == 0)
+    },
 
   },
   actions: {

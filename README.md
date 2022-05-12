@@ -54,6 +54,9 @@ Sound is also part of the user experience. In the real world, things makes sound
 
 These sounds could easily be recorded by myself. But they could probably also easily be found on the net. I googled up open source sound effect libraries and found a good bump sound by searching for "coin fall". It was harder to find a good suck-up sound, but after a while, I found a good quality sound called [Air Lock](https://freesound.org/people/VlatkoBlazek/sounds/185761/), which I imagined would work if played backwards. I reversed it and speeded it a bit up, and it became very close to what I had imagined.
 
+### Day 4:
+- Don't show game interactions when game is over
+
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)

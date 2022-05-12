@@ -124,7 +124,7 @@ function onDiscLeave(el:any, b:any) {
           :fill="gameStore.whosTurn == 1 ? 'red' : 'yellow'"
           stroke="black"
           stroke-width="1"
-
+          v-if="gameStore.gameActive"
         />
 
         <!-- discs -->
@@ -180,7 +180,10 @@ function onDiscLeave(el:any, b:any) {
           stroke-width="2"
         />-->
       </svg>
-      <div class="column-hover-sensor">
+      <div
+        v-show="gameStore.gameActive"
+        class="column-hover-sensor"
+      >
         <div
           v-for="colIndex in gameStore.dimension.cols"
           @mouseover="activeColumn = colIndex-1"
