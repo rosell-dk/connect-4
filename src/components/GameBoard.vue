@@ -4,14 +4,15 @@ import { useGameStore } from '../stores/GameStore.js'
 import dynamics from 'dynamics.js'
 
 import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
-import AppMouseDownEventListener from './AppMouseDownEventListener.vue'
+
+import { useInteractedWithPage } from '../classes/interactedWithPage.js'
 
 const gameStore = useGameStore()
 
 //const activeColumn = ref(Math.floor((gameStore.dimension.cols+1)/2))
 const activeColumn = ref(-1)   // start outside board
 
-const userInteractedWithPage = ref(false)  // only play sounds when user has interacted
+const userInteractedWithPage = useInteractedWithPage()    // only play sounds when user has interacted
 
 const show = ref(true)
 
@@ -32,7 +33,6 @@ watch(gameStore.discs, () => {
 
 
 function onKeyDown(event:any):void {
-  userInteractedWithPage.value = true;
 
   switch (event.key) {
     case 'ArrowLeft':
@@ -216,7 +216,6 @@ function onDiscLeave(el:any, b:any) {
       </div>
     </div>
     <AppKeyDownEventListener @keydown="onKeyDown"/>
-    <AppMouseDownEventListener @mousedown="userInteractedWithPage = true"/>
   </div>
 </template>
 

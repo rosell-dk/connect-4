@@ -59,6 +59,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Don't play sounds until user interacted with the page
 - Shortcut for undo: Arrow Up
 - Mute / unmute
+- Refactored code for checking if user interacted with the page into a [composable](https://vuejs.org/guide/reusability/composables.html)
 
 ## Other ideas
 - Too much sound when all discs are sucked up

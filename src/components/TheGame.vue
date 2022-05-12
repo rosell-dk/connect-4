@@ -6,10 +6,12 @@ import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
 
 const gameStore = useGameStore()
+
 </script>
 
 <template>
     <div class="connect-game">
+
       <div>
         <div v-if="gameStore.gameOver" class="win-banner">
           <div v-if="gameStore.whoWon == 1">
