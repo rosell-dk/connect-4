@@ -16,7 +16,7 @@ const props = defineProps({
 const emit = defineEmits(['keydown'])
 
 function keydownEventListener(event:any):void {
-  emit('keydown', event);
+  emit('keydown', event)
 }
 
 onMounted(function() {
