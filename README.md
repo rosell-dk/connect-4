@@ -75,4 +75,6 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
 - Docker
-- Sound effects
+- More sound effects:
+  - When user tries to play a piece, but the slot is full
+  - When the game is won
