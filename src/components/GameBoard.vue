@@ -3,8 +3,7 @@ import { ref, computed, watch, reactive } from 'vue'
 import { useGameStore } from '../stores/GameStore.js'
 import dynamics from 'dynamics.js'
 
-//import AppKeyDownEventListener from './AppKeyDownEventListener.vue'
-
+import { useDynamicsSVG } from '../classes/dynamicsSVG.js'
 import { useInteractedWithPage } from '../classes/interactedWithPage.js'
 import { useEventListener } from '@vueuse/core'
 
@@ -14,6 +13,8 @@ const gameStore = useGameStore()
 const activeColumn = ref(-1)   // start outside board
 
 const userInteractedWithPage = useInteractedWithPage()    // only play sounds when user has interacted
+
+const dynamicsSVG = useDynamicsSVG();
 
 const show = ref(true)
 
@@ -64,27 +65,17 @@ useEventListener(document, 'keydown', (event) => {
 // Called when a new disc enters the game
 function onDiscEnter(el:any, b:any) {
 
-  // For some reason, dynamics.js does not allow animating the cy attribute directly
-  // (It results in the following error: "Cannot set property cx of #<SVGCircleElement> which has only a getter")
-  // So, as a workaround, we let dynamics.js animate a reactive variable, which we watch, so
-  // we can call "setAttribute" ourselves
-
-  let animateThis = reactive({cy:0})
-  watch(animateThis, (a:any) => {
-    el.setAttribute('cy', a.cy)
+  dynamicsSVG.animateProperty({
+    element: el,
+    propertyName: 'cy',
+    startValue: 0,
+    endValue: parseInt(el.getAttribute('data-cy'), 10),
+    options: {
+      type: dynamics.gravity,
+      duration: 700,
+      bounciness:700
+    }
   })
-
-  dynamics.animate(
-      animateThis,
-      {
-        cy: parseInt(el.getAttribute('data-cy'), 10)
-      },
-      {
-        type: dynamics.gravity,
-        duration: 700,
-        bounciness:700
-      }
-  )
 
   if ((userInteractedWithPage.value) && (!gameStore.muted)) {
     window.setTimeout(() => {
@@ -98,22 +89,18 @@ function onDiscEnter(el:any, b:any) {
 
 function onDiscLeave(el:any, b:any) {
 
-  let animateThis = reactive({cy:parseInt(el.getAttribute('data-cy'), 10)})
-  watch(animateThis, (a:any) => {
-    el.setAttribute('cy', a.cy)
+  dynamicsSVG.animateProperty({
+    element: el,
+    propertyName: 'cy',
+    startValue: parseInt(el.getAttribute('data-cy'), 10),
+    endValue: -200,
+    options: {
+      type: dynamics.gravity,
+      duration: 500,
+      bounciness: 1
+    }
   })
 
-  dynamics.animate(
-      animateThis,
-      {
-        cy: -200
-      },
-      {
-        type: dynamics.gravity,
-        duration: 500,
-        bounciness:1
-      }
-  )
   if ((userInteractedWithPage.value) && (!gameStore.muted)) {
     window.setTimeout(() => {
         var audio = new Audio('/sounds/suck.mp3');

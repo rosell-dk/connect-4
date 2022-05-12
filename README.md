@@ -44,7 +44,7 @@ The data-model chosen was however not suited for the drop animations. In the mod
 
 Another thing that needed changing in order to ease animation was the grid. Each cell was its own SVG. If discs are to move from cell to cell, they cannot be part of such a solution. I had the alternatives of either implementing the discs in another layer or merge the cells in the column. I chose the latter. In fact, I merged all the cells. Doing this prevents future problems if animations needs to cross column borders.
 
-For the animation algorithm, II found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
+For the animation algorithm, I found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations. For some reason it errored when trying to animate SVG properties, but I found a workaround (which was to tell dynamics to animate a reactive property instead, watch it, and then update the SVG attribute)
 
 *Undo animation*
 With the drop animation in place, it wouldn't take much effort to create a similar effect when the discs are removed. I experimented a bit with the algorithms and went with a reversed gravity, which gives the impression that the disc is sucked up, which I found satisfying.
@@ -55,6 +55,7 @@ Sound is also part of the user experience. In the real world, things makes sound
 These sounds could easily be recorded by myself. But they could probably also easily be found on the net. I googled up open source sound effect libraries and found a good bump sound by searching for "coin fall". It was harder to find a good suck-up sound, but after a while, I found a good quality sound called [Air Lock](https://freesound.org/people/VlatkoBlazek/sounds/185761/), which I imagined would work if played backwards. I reversed it and speeded it a bit up, and it became very close to what I had imagined.
 
 ### Day 4: Misc improvements
+
 *New functionality*
 - Mute / unmute
 
@@ -66,6 +67,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 *Code quality*
 - Refactored code for checking if user interacted with the page into a [composable](https://vuejs.org/guide/reusability/composables.html)
 - Refactured code for hooking into keyboard event into using [useEventListener composable](https://vueuse.org/core/useEventListener/) from vueuse.org
+- Refactured the workaround for using dynamics.js with SVG into a composable
 
 ## Other ideas
 - Too much sound when all discs are sucked up
