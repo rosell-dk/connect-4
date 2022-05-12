@@ -34,8 +34,11 @@ First of all, the game should be playable on small screens too. It didn't take t
 
 Next, I wanted it to be playable on keyboard too. I implemented two ways to interact. Pressing a number key simply drops the disc in the corresponding slot. Using the right and left arrow keys, you can select a column and then press down arrow to drop it.
 
-### Day 3: Animation and sound
-With job specification fulfilled and quality in place, I could now move on to the glazing. First of all, it would be nice to see those discs drop. Actually, this would not only look good, but also make it easier to see what was just played.
+### Day 3: Game experience (animation and sound)
+With job specification fulfilled and quality in place, I could now move on to improving the game experience.
+
+*Drop animation*
+First of all, it would be nice to see those discs drop. Actually, this would not only look good, but also make it easier to see what was just played.
 
 The data-model chosen was however not suited for the drop animations. In the model, the discs are just states of cells, which means they cannot easily be tracked, should they move. To remedy this, I decided to argument the model with a `discs` array containing discs played. Each disc contains information on where it is (column and row) and who played it.
 
@@ -43,9 +46,17 @@ Another thing that needed changing in order to ease animation was the grid. Each
 
 For the animation algorithm, II found [dynamics.js](http://dynamicsjs.com/), which produces physics-based animations
 
-I also added sounds when discs are dropped and sucked up
+*Undo animation*
+With the drop animation in place, it wouldn't take much effort to create a similar effect when the discs are removed. I experimented a bit with the algorithms and went with a reversed gravity, which gives the impression that the disc is sucked up, which I found satisfying.
+
+*Sound*
+Sound is also part of the user experience. In the real world, things makes sounds, so to provide an authentic feeling, it would be nice with a little unintrusive bump when the discs are dropped. To back up the sucking-up effect, a suck-up sound would be in place.
+
+These sounds could easily be recorded by myself. But they could probably also easily be found on the net. I googled up open source sound effect libraries and found a good bump sound by searching for "coin fall". It was harder to find a good suck-up sound, but after a while, I found a good quality sound called [Air Lock](https://freesound.org/people/VlatkoBlazek/sounds/185761/), which I imagined would work if played backwards. I reversed it and speeded it a bit up, and it became very close to what I had imagined.
+
 
 ## Other ideas
+- Mark the winning connection (ie by blinking)
 - Upload demo
 - API version number (to prevent problems when loading old saved games)
 - Redo
