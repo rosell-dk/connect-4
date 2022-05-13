@@ -95,7 +95,7 @@ function onRemovePlayerClick() {
   }
 
   & label {
-    line-height: 2;
+    line-height: 2.4;
   }
 
   .actionbar-players {
