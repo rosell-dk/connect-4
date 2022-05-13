@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { NButton } from 'naive-ui'
+import { NButton, NSelect } from 'naive-ui'
 
 import { useGameStore } from '../stores/GameStore.js'
 import MuteButton from './MuteButton.vue'
 
 const gameStore = useGameStore()
 
+let colorOptions = [
+  {label: 'Red', value: 'red'},
+  {label: 'Yellow', value: 'yellow'},
+  {label: 'Green', value: 'green'},
+  {label: 'Orange', value: 'orange'},
+  {label: 'Purple', value: 'purple'},
+]
 function onResetClick() {
     gameStore.$reset();
 }
@@ -29,6 +36,11 @@ function onUndoClick() {
       </n-button>
       <br>
     </p>
+    <div v-for="(player,index) in gameStore.players">
+      <h3>Player {{ index+1 }}</h3>
+      Color:
+      <n-select v-model:value="gameStore.players[index].color" :options="colorOptions" />
+    </div>
   </div>
 </template>
 

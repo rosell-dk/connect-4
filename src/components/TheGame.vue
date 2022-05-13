@@ -26,12 +26,7 @@ audio.play('/sounds/win.mp3')
     <div class="connect-game">
       <div>
         <div v-if="gameStore.gameOver" class="win-banner">
-          <div v-if="gameStore.whoWon == 1">
-            RED WINS
-          </div>
-          <div v-else-if="gameStore.whoWon == 2">
-            YELLOW WINS
-          </div>
+          Player {{ gameStore.whoWon }} WINS
         </div>
         <div class="board-container">
           <GameBoard />

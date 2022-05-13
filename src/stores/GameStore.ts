@@ -11,6 +11,10 @@ interface Disc {
   player: number;  // the player index (1 = player 1)
 }
 
+interface Player {
+  color: string;
+}
+
 interface GameData {
   dimension: BoardDimension;
   board: number[][];    // array of columns of rowCount of numbers
@@ -22,6 +26,7 @@ interface GameData {
   muted: boolean;
   history: number[];    // list of all moves in the game,
                         // ie [4, 3] meaning that first coin was put in slot 4 and second in slot 3
+  players: Player[];
 }
 
 export const useGameStore = defineStore('GameStore', {
@@ -48,6 +53,10 @@ export const useGameStore = defineStore('GameStore', {
       requiredToWin: 4,    // number of connected required to win
       muted: false,
       history: [],
+      players: [
+        {color: 'red'},
+        {color: 'yellow'}
+      ]
     }
     return data
   },
