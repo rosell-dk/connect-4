@@ -4,6 +4,7 @@ Connect 4 game, implemented in Vue 3
 I was challenged to implement a Connect-4 game in seven days, beginning from monday the 9th of May 2022.
 The game should have state persistence and undo functionality
 
+You can see the demo (day 5) [here](https://little-b.it/connect4/v1/)
 
 ## Log:
 
@@ -84,22 +85,22 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - 3 player game (n player)
 - The required connections to win can now be tweaked
 
+Uploaded a demo
+
+
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)
-- Upload demo
-- API version number (to prevent problems when loading old saved games)
+- Game settings: Board size
 - Redo
 - Save game
 - Play against computer
 - Watch a replay of the entire game
 - Save the game as SVG animation
-- Game settings: Board size
 - Rule variation: [PopOut](https://en.wikipedia.org/wiki/Connect_Four)
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
 - Docker
-- More sound effects:
-  - When user tries to play a piece, but the slot is full
 - [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)
 - Pan through history
+- Optionally only allow the player to undo his own moves
