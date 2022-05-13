@@ -37,39 +37,44 @@ function insertDisc(columnIndex:number):void {
 }
 
 useEventListener(document, 'keydown', (event) => {
-  if (
-    gameStore.gameActive &&
-    gameStore.isKeyboardAllowdForCurrentPlayer() &&
-    document.activeElement == document.body
-  ) {
-    switch (event.key) {
-      case 'ArrowLeft':
-        activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
-        break
-      case 'ArrowRight':
-        activeColumn.value = Math.min(activeColumn.value+1, gameStore.dimension.cols);
-        break
-      case 'ArrowDown':
-        event.preventDefault();  // to prevent document scrolling
-        if ((activeColumn.value >= 0) && (activeColumn.value < gameStore.dimension.cols)) {
-          insertDisc(activeColumn.value)
-        }
-        break
-      case 'ArrowUp':
-        event.preventDefault();
-        gameStore.undoLastMove();
-        break
-      case 'm':
-        gameStore.muted = !gameStore.muted;
-        break
+  if (document.activeElement == document.body) {
+
+    if (event.key == 'm') {
+      gameStore.muted = !gameStore.muted;
     }
 
-    // Pressing digit drops it on the corresponding slot
-    let digitTest = /^[1-9]$/;
-    if (digitTest.test(event.key)) {
-      let colIndex = parseInt(event.key, 10) - 1
-      insertDisc(colIndex)
+    if (gameStore.isKeyboardAllowdForCurrentPlayer()) {
+      if (event.key == 'ArrowUp') {
+        event.preventDefault();
+        gameStore.undoLastMove();
+      }
+      
+      if (gameStore.gameActive) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
+            break
+          case 'ArrowRight':
+            activeColumn.value = Math.min(activeColumn.value+1, gameStore.dimension.cols);
+            break
+          case 'ArrowDown':
+            event.preventDefault();  // to prevent document scrolling
+            if ((activeColumn.value >= 0) && (activeColumn.value < gameStore.dimension.cols)) {
+              insertDisc(activeColumn.value)
+            }
+            break
+        }
+
+        // Pressing digit drops it on the corresponding slot
+        let digitTest = /^[1-9]$/;
+        if (digitTest.test(event.key)) {
+          let colIndex = parseInt(event.key, 10) - 1
+          insertDisc(colIndex)
+        }
+      }
+
     }
+
   }
 })
 
@@ -227,8 +232,6 @@ function onDiscLeave(el:any, b:any) {
 }*/
 
 .game-board {
-  max-width: 600px;
-  width: 100%;
 
   .game-board-actual {
     position: relative;
