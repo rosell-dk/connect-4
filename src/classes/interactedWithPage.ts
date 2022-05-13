@@ -1,26 +1,31 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 // For registering if user has interacted with the page
-// Can for example be used before trying to play sounds
 export function useInteractedWithPage() {
 
   const userInteractedWithPage = ref(false)
 
   function onPageInteraction(event: any) {
     userInteractedWithPage.value = true
+
+    // We got an interaction and we can stop listening
+    removeListeners()
   }
 
-  onMounted(() => {
+  function addListeners() {
     window.addEventListener('mousemove', onPageInteraction)
     window.addEventListener('mousedown', onPageInteraction)
     window.addEventListener('keydown', onPageInteraction)
-  })
+  }
 
-  onUnmounted(() => {
+  function removeListeners() {
     window.removeEventListener('mousemove', onPageInteraction)
     window.removeEventListener('mousedown', onPageInteraction)
     window.removeEventListener('keydown', onPageInteraction)
-  })
+  }
+
+  onMounted(addListeners)
+  onUnmounted(removeListeners)
 
   return userInteractedWithPage
 }
