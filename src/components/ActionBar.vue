@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { NButton, NSelect, NSlider } from 'naive-ui'
+import { NButton, NSelect, NSlider, NSpace } from 'naive-ui'
 
 import { useGameStore } from '../stores/GameStore.js'
 import MuteButton from './MuteButton.vue'
@@ -73,25 +73,32 @@ function onRemovePlayerClick() {
         <n-select v-model:value="gameStore.players[index].inputMethod" :options="inputMethods" />
       </div>
     </div>
-    <p>
+    <br>
+    <n-space vertical>
       <n-button @click="onAddPlayerClick">Add player</n-button>
-    </p>
-    <p>
       <n-button @click="onRemovePlayerClick">Remove player</n-button>
-    </p>
+    </n-space>
   </div>
 </template>
 
 <style scoped lang="scss">
 .action-bar {
-  width: 160px;
+  width: 240px;
   text-align: left;
+  position: relative;
 
+  @media (max-width: 600px) {
+    width: auto;
+  }
+
+  p {
+    margin-top: 0;
+  }
   & > .mute-button {
     text-align: right;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 0px;
+    top: 0px;
   }
 
   & label {
@@ -106,18 +113,6 @@ function onRemovePlayerClick() {
       & > label {
         width: 80px;
       }
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .action-bar {
-    width: auto;
-
-    & > p {
-      display: inline-block;
-      margin-right: 20px;
-      margin-bottom: 0;
     }
   }
 }
