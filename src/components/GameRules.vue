@@ -10,12 +10,14 @@ const gameStore = useGameStore()
 <template>
   <div class="game-rules">
     <h2>Game rules</h2>
-
     <div>
       <label>Required connections to win:</label>
       <n-input-number v-model:value="gameStore.requiredToWin" :min="1" :max="7"  class="required-connections-input"/>
     </div>
 
+    <h2>Instructions</h2>
+    When playing with keyboard, use arrow keys to select column and array down to drop. You can undo with arrow up.
+    You can also drop using keys 1-9. Make sure the board is selected
   </div>
 </template>
 
