@@ -30,6 +30,9 @@ function insertDisc(columnIndex:number):void {
 }
 
 useEventListener(document, 'keydown', (event) => {
+  if (!gameStore.isKeyboardAllowdForCurrentPlayer()) {
+    return
+  }
   switch (event.key) {
     case 'ArrowLeft':
       activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
@@ -178,7 +181,7 @@ function onDiscLeave(el:any, b:any) {
         />-->
       </svg>
       <div
-        v-show="gameStore.gameActive"
+        v-show="gameStore.gameActive && gameStore.isMouseAllowdForCurrentPlayer()"
         class="column-hover-sensor"
       >
         <div

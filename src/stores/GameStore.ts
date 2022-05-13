@@ -13,6 +13,7 @@ interface Disc {
 
 interface Player {
   color: string;
+  inputMethod: number;    // 0=any, 1=mouse only, 2=keyboard only
 }
 
 interface GameData {
@@ -47,15 +48,15 @@ export const useGameStore = defineStore('GameStore', {
       },
       board: board,
       discs: [],
-      whosTurn: 1,
+      whosTurn: 1,        // beware: this is 1-indexed (TODO: change to zero-index)
       whoWon: 0,
       gameActive: true,
       requiredToWin: 4,    // number of connected required to win
       muted: false,
       history: [],
       players: [
-        {color: 'red'},
-        {color: 'yellow'}
+        {color: 'red', inputMethod: 0},
+        {color: 'yellow', inputMethod: 0}
       ]
     }
     return data
@@ -68,9 +69,17 @@ export const useGameStore = defineStore('GameStore', {
     gameOver: (state) => {
       return (state.whoWon > 0)
     },
-
+    currentInputMethod: (state) => {
+      return state.players[state.whosTurn - 1].inputMethod
+    },
   },
   actions: {
+    isKeyboardAllowdForCurrentPlayer() {
+      return (this.currentInputMethod != 1)
+    },
+    isMouseAllowdForCurrentPlayer() {
+      return (this.currentInputMethod != 2)
+    },
     getCellValue(col:number, row:number):number {
       if ((col < 0) || (row < 0) || (col>this.dimension.cols -1) || (row>this.dimension.rows - 1)) {
         return -1

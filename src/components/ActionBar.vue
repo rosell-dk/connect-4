@@ -7,13 +7,20 @@ import MuteButton from './MuteButton.vue'
 
 const gameStore = useGameStore()
 
-let colorOptions = [
+const colorOptions = [
   {label: 'Red', value: 'red'},
   {label: 'Yellow', value: 'yellow'},
   {label: 'Green', value: 'green'},
   {label: 'Orange', value: 'orange'},
   {label: 'Purple', value: 'purple'},
 ]
+
+const inputMethods = [
+  {label: 'Any', value: 0},
+  {label: 'Mouse', value: 1},
+  {label: 'Keyboard', value: 2},
+]
+
 function onResetClick() {
     gameStore.$reset();
 }
@@ -36,10 +43,16 @@ function onUndoClick() {
       </n-button>
       <br>
     </p>
-    <div v-for="(player,index) in gameStore.players">
+    <div v-for="(player,index) in gameStore.players" class="actionbar-players">
       <h3>Player {{ index+1 }}</h3>
-      Color:
-      <n-select v-model:value="gameStore.players[index].color" :options="colorOptions" />
+      <div>
+        <label>Color</label>
+        <n-select v-model:value="gameStore.players[index].color" :options="colorOptions" />
+      </div>
+      <div>
+        <label>Input</label>
+        <n-select v-model:value="gameStore.players[index].inputMethod" :options="inputMethods" />
+      </div>
     </div>
   </div>
 </template>
@@ -51,6 +64,21 @@ function onUndoClick() {
 
   & > .mute-button {
     text-align: right;
+  }
+
+  & label {
+    line-height: 2;
+  }
+
+  .actionbar-players {
+    & > div {
+      display: flex;
+      margin-bottom: 5px;
+
+      & > label {
+        width: 80px;
+      }
+    }
   }
 }
 

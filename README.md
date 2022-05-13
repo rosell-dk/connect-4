@@ -78,6 +78,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Play a fanfare when the game is won
 - Using naiveui for basic components
 - Let the players choose their colors
+- Choose input method for players
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)
@@ -91,7 +92,6 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Save the game as SVG animation
 - Game settings: Board size
 - Game settings: Number of players
-- Game settings: Color, name and input method of players
 - Rule variation: [PopOut](https://en.wikipedia.org/wiki/Connect_Four)
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
