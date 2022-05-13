@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import dynamics from 'dynamics.js'
 
