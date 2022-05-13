@@ -13,6 +13,7 @@ const colorOptions = [
   {label: 'Green', value: 'green'},
   {label: 'Orange', value: 'orange'},
   {label: 'Purple', value: 'purple'},
+  {label: 'White!', value: 'white'},
 ]
 
 const inputMethods = [
@@ -21,15 +22,31 @@ const inputMethods = [
   {label: 'Keyboard', value: 2},
 ]
 
+function releaseFocus() {
+  let activeElement:any = document.activeElement
+  activeElement.blur()
+}
+
 function onNewGameClick() {
-    let activeElement:any = document.activeElement
-    activeElement.blur()  // Let go of focus
-    gameStore.newGame()
+  releaseFocus()
+  gameStore.newGame()
 }
 
 function onUndoClick() {
-    gameStore.undoLastMove();
+  releaseFocus()
+  gameStore.undoLastMove()
 }
+
+function onAddPlayerClick() {
+  releaseFocus()
+  gameStore.addPlayer()
+}
+
+function onRemovePlayerClick() {
+  releaseFocus()
+  gameStore.removePlayer()
+}
+
 </script>
 
 <template>
@@ -56,6 +73,13 @@ function onUndoClick() {
         <n-select v-model:value="gameStore.players[index].inputMethod" :options="inputMethods" />
       </div>
     </div>
+    <p>
+      <n-button @click="onAddPlayerClick">Add player</n-button>
+    </p>
+    <p>
+      <n-button @click="onRemovePlayerClick">Remove player</n-button>
+    </p>
+
   </div>
 </template>
 

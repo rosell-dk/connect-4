@@ -69,17 +69,38 @@ export const useGameStore = defineStore('GameStore', {
     gameOver: (state) => {
       return (state.whoWon > 0)
     },
-    currentInputMethod: (state) => {
-      return state.players[state.whosTurn - 1].inputMethod
-    },
   },
   actions: {
+    // Note: zero-based
+    getPlayerColor(playerIndex:number) {
+      if (playerIndex >= this.players.length) {
+        return '#999'
+      }
+      return this.players[playerIndex].color
+    },
+    getCurrentPlayerColor() {
+      return this.getPlayerColor(this.whosTurn - 1)
+    },
+    getDiscColor(disc:Disc) {
+      return this.getPlayerColor(disc.player - 1)
+    },
+
+    getInputMethod(playerIndex:number) {
+      if (playerIndex >= this.players.length) {
+        return 0
+      }
+      return this.players[playerIndex].inputMethod
+    },
+    getCurrentInputMethod() {
+      return this.getInputMethod(this.whosTurn - 1)
+    },
     isKeyboardAllowdForCurrentPlayer() {
-      return (this.currentInputMethod != 1)
+      return (this.getCurrentInputMethod() != 1)
     },
     isMouseAllowdForCurrentPlayer() {
-      return (this.currentInputMethod != 2)
+      return (this.getCurrentInputMethod() != 2)
     },
+
     clearBoard() {
       let newBoard = []
       for (let col=0; col<this.dimension.cols; col++) {
@@ -95,6 +116,17 @@ export const useGameStore = defineStore('GameStore', {
     newGame() {
       this.clearBoard();
       //this.$reset();
+    },
+    addPlayer() {
+      this.players.push(
+        {color: 'green', inputMethod: 0}
+      )
+    },
+    removePlayer() {
+      this.players.pop()
+      if (this.whosTurn > this.players.length) {
+        this.whosTurn = 1
+      }
     },
     getCellValue(col:number, row:number):number {
       if ((col < 0) || (row < 0) || (col>this.dimension.cols -1) || (row>this.dimension.rows - 1)) {
@@ -120,10 +152,10 @@ export const useGameStore = defineStore('GameStore', {
     },
 
     toggleWhosTurn():void {
-      if (this.whosTurn == 1) {
-        this.whosTurn = 2
-      } else {
+      if (this.whosTurn >= this.players.length) {
         this.whosTurn = 1
+      } else {
+        this.whosTurn++
       }
     },
 

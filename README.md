@@ -81,6 +81,8 @@ These sounds could easily be recorded by myself. But they could probably also ea
 *Features*
 - Let the players choose their colors
 - Choose input method for players
+- 3 player game (n player)
+
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)
@@ -88,7 +90,6 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - API version number (to prevent problems when loading old saved games)
 - Redo
 - Save game
-- 3 player game (n player)
 - Play against computer
 - Watch a replay of the entire game
 - Save the game as SVG animation

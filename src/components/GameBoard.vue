@@ -48,7 +48,7 @@ useEventListener(document, 'keydown', (event) => {
         event.preventDefault();
         gameStore.undoLastMove();
       }
-      
+
       if (gameStore.gameActive) {
         switch (event.key) {
           case 'ArrowLeft':
@@ -131,7 +131,7 @@ function onDiscLeave(el:any, b:any) {
           :cx="50 + 100 * activeColumn"
           :cy="-50"
           r="43"
-          :fill="gameStore.players[gameStore.whosTurn-1].color"
+          :fill="gameStore.getCurrentPlayerColor()"
           stroke="black"
           stroke-width="1"
           v-if="gameStore.gameActive"
@@ -162,7 +162,7 @@ function onDiscLeave(el:any, b:any) {
             cy="0"
             :data-cy="50 + 100 * (gameStore.dimension.rows - 1 - disc.row)"
             r="43"
-            :fill="gameStore.players[disc.player-1].color"
+            :fill="gameStore.getDiscColor(disc)"
             stroke="black"
             stroke-width="1"
             class="disc" />
