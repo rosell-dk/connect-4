@@ -17,6 +17,7 @@ interface Player {
 }
 
 interface GameData {
+  api: number;
   dimension: BoardDimension;
   board: number[][];    // array of columns of rowCount of numbers
   discs: Disc[];
@@ -42,6 +43,7 @@ export const useGameStore = defineStore('GameStore', {
       board[c] = []
     }
     const data:GameData = {
+      api: 1,
       dimension: {
         cols: colCount,
         rows: rowCount
@@ -57,7 +59,7 @@ export const useGameStore = defineStore('GameStore', {
       players: [
         {color: 'red', inputMethod: 0},
         {color: 'yellow', inputMethod: 0}
-      ]
+      ],
     }
     return data
   },
@@ -175,7 +177,7 @@ export const useGameStore = defineStore('GameStore', {
       return true
     },
 
-    // remove disc from top of col
+    // remove disc from top of col (only in board)
     removeDiscAtTopOfCol(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
       if (row == 0) {
