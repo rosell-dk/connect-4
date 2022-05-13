@@ -54,7 +54,7 @@ Sound is also part of the user experience. In the real world, things makes sound
 
 These sounds could easily be recorded by myself. But they could probably also easily be found on the net. I googled up open source sound effect libraries and found a good bump sound by searching for "coin fall". It was harder to find a good suck-up sound, but after a while, I found a good quality sound called [Air Lock](https://freesound.org/people/VlatkoBlazek/sounds/185761/), which I imagined would work if played backwards. I reversed it and speeded it a bit up, and it became very close to what I had imagined.
 
-### Day 4: Misc improvements
+### Day 4: Various improvements
 
 *New functionality*
 - Mute / unmute
@@ -69,10 +69,14 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Refactured code for hooking into keyboard event into using [useEventListener composable](https://vueuse.org/core/useEventListener/) from vueuse.org
 - Refactured the workaround for using dynamics.js with SVG into a composable
 
-### Day 5: Misc improvements
+### Day 5: Various improvements
+*Code quality*
 - Refactored audio play into a composable
+
+*UI*
 - Limit simultaneously suck-up sounds (it generated too much noise when all discs where sucked up simultaneously)
 - Play a fanfare when the game is won
+- Using naiveui for basic components
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)
@@ -86,7 +90,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Save the game as SVG animation
 - Game settings: Board size
 - Game settings: Number of players
-- Game settings: Color, name and controller of players
+- Game settings: Color, name and input method of players
 - Rule variation: [PopOut](https://en.wikipedia.org/wiki/Connect_Four)
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
@@ -94,3 +98,4 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - More sound effects:
   - When user tries to play a piece, but the slot is full
 - [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)
+- Pan through history
