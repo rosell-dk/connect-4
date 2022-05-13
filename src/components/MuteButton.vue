@@ -18,8 +18,8 @@ function onClick() {
     https://www.svgrepo.com/svg/74628/speaker-sound-muted
     - They are open source
     -->
-    <svg height="30" @click="onClick">
-      <svg height="30" viewBox="0 0 300 518" x="-15">
+    <svg height="30" width="40" @click="onClick">
+      <svg height="30" viewBox="0 0 300 518" x="-5">
       	<g>
       		<path d="M257.269,78.412L91.494,196.757H26.775C12.01,196.757,0,208.844,0,223.532v71.451c0,14.765,12.087,26.774,26.775,26.774
       			h64.719l165.775,118.346c12.086,8.645,21.727,3.596,21.727-11.169V89.581C279.072,74.816,269.355,69.768,257.269,78.412z"/>
@@ -30,7 +30,7 @@ function onClick() {
       	</g>
       </svg>
       <g>
-        <svg v-show="!modelValue" width="30" viewBox="0 0 24 24" x="130">
+        <svg v-show="!modelValue" width="30" viewBox="0 0 24 24" x="10">
           <path d="M18.718 4.222a.75.75 0 011.06 0c4.296 4.296 4.296 11.26 0 15.556a.75.75 0 01-1.06-1.06 9.5 9.5 0 000-13.436.75.75 0 010-1.06z"/>
           <path d="M16.243 7.757a.75.75 0 10-1.061 1.061 4.5 4.5 0 010 6.364.75.75 0 001.06 1.06 6 6 0 000-8.485z"/>
         </svg>
