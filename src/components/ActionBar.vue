@@ -66,6 +66,9 @@ function onUndoClick() {
 
   & > .mute-button {
     text-align: right;
+    position: absolute;
+    right: 20px;
+    top: 20px;
   }
 
   & label {
