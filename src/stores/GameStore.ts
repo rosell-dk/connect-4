@@ -90,6 +90,7 @@ export const useGameStore = defineStore('GameStore', {
       this.whosTurn = 1
       this.whoWon = 0
       this.gameActive = true
+      this.history = []
     },
     newGame() {
       this.clearBoard();
