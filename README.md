@@ -72,6 +72,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 ### Day 5: Misc improvements
 - Refactored audio play into a composable
 - Limit simultaneously suck-up sounds (it generated too much noise when all discs where sucked up simultaneously)
+- Play a fanfare when the game is won
 
 ## Other ideas
 - Mark the winning connection (ie by blinking)
@@ -92,5 +93,4 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Docker
 - More sound effects:
   - When user tries to play a piece, but the slot is full
-  - Play a fanfare when the game is won
 - [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)

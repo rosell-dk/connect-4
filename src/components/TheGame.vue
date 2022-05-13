@@ -1,11 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useGameStore } from '../stores/GameStore.js'
+
+import { useAudioPlay } from '../composables/audioPlay.js'
 
 import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
 
 const gameStore = useGameStore()
+const audio = useAudioPlay()
+
+const { gameActive } = storeToRefs(gameStore)
+
+watch(gameActive, () => {
+  if (!gameActive.value) {
+    audio.play('/sounds/win.mp3')
+  }
+})
+audio.play('/sounds/win.mp3')
 
 </script>
 

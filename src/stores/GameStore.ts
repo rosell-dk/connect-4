@@ -17,6 +17,7 @@ interface GameData {
   discs: Disc[];
   whosTurn: number;
   whoWon: number;
+  gameActive: boolean;
   requiredToWin: number;
   muted: boolean;
   history: number[];    // list of all moves in the game,
@@ -43,6 +44,7 @@ export const useGameStore = defineStore('GameStore', {
       discs: [],
       whosTurn: 1,
       whoWon: 0,
+      gameActive: true,
       requiredToWin: 4,    // number of connected required to win
       muted: false,
       history: [],
@@ -56,9 +58,6 @@ export const useGameStore = defineStore('GameStore', {
     },
     gameOver: (state) => {
       return (state.whoWon > 0)
-    },
-    gameActive: (state) => {
-      return (state.whoWon == 0)
     },
 
   },
@@ -132,6 +131,7 @@ export const useGameStore = defineStore('GameStore', {
       let col:number = (this.history.pop() as number)
       this.removeDiscAtTopOfCol(col)
       this.whoWon = 0
+      this.gameActive = true
       this.toggleWhosTurn()
     },
 
@@ -162,6 +162,7 @@ export const useGameStore = defineStore('GameStore', {
         (same(1, -1) >= this.requiredToWin)     // checks diagonally (-45 degrees)
       ) {
         this.whoWon = who
+        this.gameActive = false
       }
       /*
       this.debug.sameHorizontal = same(1, 0);
