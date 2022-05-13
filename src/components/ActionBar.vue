@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { NButton, NSelect } from 'naive-ui'
+import { NButton, NSelect, NSlider } from 'naive-ui'
 
 import { useGameStore } from '../stores/GameStore.js'
 import MuteButton from './MuteButton.vue'
@@ -79,7 +79,6 @@ function onRemovePlayerClick() {
     <p>
       <n-button @click="onRemovePlayerClick">Remove player</n-button>
     </p>
-
   </div>
 </template>
 

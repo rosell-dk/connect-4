@@ -7,6 +7,7 @@ import { useAudioPlay } from '../composables/audioPlay.js'
 
 import GameBoard from './GameBoard.vue'
 import ActionBar from './ActionBar.vue'
+import GameRules from './GameRules.vue'
 
 const gameStore = useGameStore()
 const audio = useAudioPlay()
@@ -24,49 +25,51 @@ audio.play('/sounds/win.mp3')
 
 <template>
   <div class="connect-game">
-    <div class="left-pane">
-      <div v-if="gameStore.gameOver" class="win-banner">
-        Player {{ gameStore.whoWon }} WINS
+    <div class="main">
+      <div class="left-pane">
+        <div v-if="gameStore.gameOver" class="win-banner">
+          Player {{ gameStore.whoWon }} WINS
+        </div>
+        <div class="board-container">
+          <GameBoard />
+        </div>
       </div>
-      <div class="board-container">
-        <GameBoard />
-      </div>
+      <ActionBar />
     </div>
-    <ActionBar />
-    <!--
-    <audio autoplay controls>
-      <source src="../assets/sounds/coin-dropped.mp3" type="audio/mpeg">
-    </audio>-->
-
+    <GameRules />
   </div>
 </template>
 
 <style scoped lang="scss">
 .connect-game {
-  display: flex;
-  max-width: 800px;
   padding: 30px;
 
-  @media (max-width: 600px) {
-    display: block;
-  }
+  & > .main {
+    display: flex;
+    max-width: 800px;
 
-  & > .left-pane {
-    flex-grow: 1;
-    position: relative;
-
-    & .win-banner {
-      font-size: 30px;
-      font-weight: bold;
-      max-width: 600px;
-      position: absolute;
-      width: 100%;
+    @media (max-width: 600px) {
+      display: block;
     }
-    & .board-container {
-      padding-right: 50px;
 
-      @media (max-width: 600px) {
-        padding-right: 0px;
+    .left-pane {
+      flex-grow: 1;
+      position: relative;
+
+      & .win-banner {
+        font-size: 30px;
+        font-weight: bold;
+        max-width: 600px;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+      }
+      & .board-container {
+        padding-right: 50px;
+
+        @media (max-width: 600px) {
+          padding-right: 0px;
+        }
       }
     }
   }

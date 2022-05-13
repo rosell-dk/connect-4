@@ -82,6 +82,7 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Let the players choose their colors
 - Choose input method for players
 - 3 player game (n player)
+- The required connections to win can now be tweaked
 
 
 ## Other ideas
@@ -94,7 +95,6 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Watch a replay of the entire game
 - Save the game as SVG animation
 - Game settings: Board size
-- Game settings: Number of players
 - Rule variation: [PopOut](https://en.wikipedia.org/wiki/Connect_Four)
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
