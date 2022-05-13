@@ -21,8 +21,9 @@ const inputMethods = [
   {label: 'Keyboard', value: 2},
 ]
 
-function onResetClick() {
-    gameStore.$reset();
+function onNewGameClick() {
+    //gameStore.$reset();
+    gameStore.newGame()
 }
 
 function onUndoClick() {
@@ -34,7 +35,7 @@ function onUndoClick() {
   <div class="action-bar">
     <MuteButton v-model="gameStore.muted" class="mute-button"/>
     <p>
-      <n-button @click="onResetClick">Restart game</n-button>
+      <n-button @click="onNewGameClick">New game</n-button>
     </p>
     <p>
       <n-button

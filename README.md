@@ -77,6 +77,8 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Limit simultaneously suck-up sounds (it generated too much noise when all discs where sucked up simultaneously)
 - Play a fanfare when the game is won
 - Using naiveui for basic components
+
+*Features*
 - Let the players choose their colors
 - Choose input method for players
 

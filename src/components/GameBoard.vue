@@ -23,6 +23,13 @@ const columnStyle = computed(() => {
   }
 })
 
+function onColumnHover(colIndex:number) {
+  if (!gameStore.isMouseAllowdForCurrentPlayer()) {
+    return
+  }
+  activeColumn.value = colIndex-1
+}
+
 function insertDisc(columnIndex:number):void {
   if (!gameStore.gameOver) {
     gameStore.insertDisc(columnIndex);
@@ -181,12 +188,12 @@ function onDiscLeave(el:any, b:any) {
         />-->
       </svg>
       <div
-        v-show="gameStore.gameActive && gameStore.isMouseAllowdForCurrentPlayer()"
+        v-show="gameStore.gameActive"
         class="column-hover-sensor"
       >
         <div
           v-for="colIndex in gameStore.dimension.cols"
-          @mouseover="activeColumn = colIndex-1"
+          @mouseover="onColumnHover(colIndex)"
           @click="insertDisc(colIndex-1)"
           :style="columnStyle"
           :class="(activeColumn == colIndex-1 ? 'active-column' : '')"

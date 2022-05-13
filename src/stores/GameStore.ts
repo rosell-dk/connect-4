@@ -37,7 +37,7 @@ export const useGameStore = defineStore('GameStore', {
     let colCount:number = 7;
     let rowCount:number = 6;
 
-    for (var c=0; c<colCount; c++) {
+    for (let c=0; c<colCount; c++) {
       //board[c] = new Array(rowCount)
       board[c] = []
     }
@@ -79,6 +79,21 @@ export const useGameStore = defineStore('GameStore', {
     },
     isMouseAllowdForCurrentPlayer() {
       return (this.currentInputMethod != 2)
+    },
+    clearBoard() {
+      let newBoard = []
+      for (let col=0; col<this.dimension.cols; col++) {
+        newBoard[col] = []
+      }
+      this.board = newBoard
+      this.discs = []
+      this.whosTurn = 1
+      this.whoWon = 0
+      this.gameActive = true
+    },
+    newGame() {
+      this.clearBoard();
+      //this.$reset();
     },
     getCellValue(col:number, row:number):number {
       if ((col < 0) || (row < 0) || (col>this.dimension.cols -1) || (row>this.dimension.rows - 1)) {
