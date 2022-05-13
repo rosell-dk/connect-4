@@ -4,8 +4,8 @@ import { useEventListener } from '@vueuse/core'
 import dynamics from 'dynamics.js'
 
 import { useGameStore } from '../stores/GameStore.js'
-import { useDynamicsSVG } from '../classes/dynamicsSVG.js'
-import { useAudioPlay } from '../classes/audioPlay.js'
+import { useDynamicsSVG } from '../composables/dynamicsSVG.js'
+import { useAudioPlay } from '../composables/audioPlay.js'
 
 import Limitter from '../classes/Limitter.js'
 
