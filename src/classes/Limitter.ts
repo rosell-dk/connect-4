@@ -2,7 +2,7 @@
 Limit calls to a function
 */
 
-interface CallObject {
+interface LimitterCallObject {
   fn: Function;
   blockingTime: number;
 }
@@ -11,7 +11,7 @@ export default class Limitter {
 
   blocked: boolean = false
 
-  call(obj:CallObject) {
+  call(obj:LimitterCallObject) {
     if (this.blocked) {
       return
     }
