@@ -93,7 +93,7 @@ function onDiscEnter(el:any, b:any) {
     }
   })
 
-  audio.playAfterTimeout('/sounds/coin-dropped.mp3', 200)
+  audio.playAfterTimeout('sounds/coin-dropped.mp3', 200)
 }
 
 function onDiscLeave(el:any, b:any) {
@@ -113,7 +113,7 @@ function onDiscLeave(el:any, b:any) {
   // Play audio, unless it was called recently.
   // this avoids sound hell when all discs are removed simultaneously
   suckSoundLimitter.call({
-    fn: () => audio.play('/sounds/suck.mp3'),
+    fn: () => audio.play('sounds/suck.mp3'),
     blockingTime: 100
   })
 }

@@ -16,10 +16,9 @@ const { gameActive } = storeToRefs(gameStore)
 
 watch(gameActive, () => {
   if (!gameActive.value) {
-    audio.play('/sounds/win.mp3')
+    audio.play('sounds/win.mp3')
   }
 })
-audio.play('/sounds/win.mp3')
 
 </script>
 
