@@ -71,10 +71,9 @@ These sounds could easily be recorded by myself. But they could probably also ea
 
 ### Day 5: Misc improvements
 - Refactored audio play into a composable
-
+- Limit simultaneously suck-up sounds (it generated too much noise when all discs where sucked up simultaneously)
 
 ## Other ideas
-- Too much sound when all discs are sucked up
 - Mark the winning connection (ie by blinking)
 - Upload demo
 - API version number (to prevent problems when loading old saved games)

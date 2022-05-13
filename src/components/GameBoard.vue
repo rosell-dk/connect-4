@@ -7,9 +7,13 @@ import { useGameStore } from '../stores/GameStore.js'
 import { useDynamicsSVG } from '../classes/dynamicsSVG.js'
 import { useAudioPlay } from '../classes/audioPlay.js'
 
+import Limitter from '../classes/Limitter.js'
+
 const gameStore = useGameStore()
-const dynamicsSVG = useDynamicsSVG();
-const audio = useAudioPlay();
+const dynamicsSVG = useDynamicsSVG()
+const audio = useAudioPlay()
+
+const suckSoundLimitter = new Limitter()
 
 const activeColumn = ref(Math.floor((gameStore.dimension.cols)/2))  // start in the middle of the board
 
@@ -86,7 +90,12 @@ function onDiscLeave(el:any, b:any) {
     }
   })
 
-  audio.play('/sounds/suck.mp3');
+  // Play audio, unless it was called recently.
+  // this avoids sound hell when all discs are removed simultaneously
+  suckSoundLimitter.call({
+    fn: () => audio.play('/sounds/suck.mp3'),
+    blockingTime: 100
+  })
 }
 
 </script>
