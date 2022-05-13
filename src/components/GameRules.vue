@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { NSlider } from 'naive-ui'
+import { NInputNumber } from 'naive-ui'
 
 import { useGameStore } from '../stores/GameStore.js'
 
@@ -13,7 +13,7 @@ const gameStore = useGameStore()
 
     <div>
       <label>Required connections to win:</label>
-      <n-slider v-model:value="gameStore.requiredToWin" :min="1" :max="7" class="slider"/>
+      <n-input-number v-model:value="gameStore.requiredToWin" :min="1" :max="7"  class="required-connections-input"/>
     </div>
 
   </div>
@@ -27,9 +27,10 @@ const gameStore = useGameStore()
 
     & > label {
       width: 220px;
+      line-height: 2.4;
     }
-    & > .slider {
-      max-width: 100px;
+    & .required-connections-input {
+      max-width: 80px;
     }
   }
 }
