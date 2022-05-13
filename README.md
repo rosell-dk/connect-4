@@ -69,6 +69,10 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - Refactured code for hooking into keyboard event into using [useEventListener composable](https://vueuse.org/core/useEventListener/) from vueuse.org
 - Refactured the workaround for using dynamics.js with SVG into a composable
 
+### Day 5: Misc improvements
+- Refactored audio play into a composable
+
+
 ## Other ideas
 - Too much sound when all discs are sucked up
 - Mark the winning connection (ie by blinking)
@@ -90,3 +94,4 @@ These sounds could easily be recorded by myself. But they could probably also ea
 - More sound effects:
   - When user tries to play a piece, but the slot is full
   - Play a fanfare when the game is won
+- [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)

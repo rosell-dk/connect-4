@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { ref, computed, watch, reactive } from 'vue'
-import { useGameStore } from '../stores/GameStore.js'
+import { useEventListener } from '@vueuse/core'
 import dynamics from 'dynamics.js'
 
+import { useGameStore } from '../stores/GameStore.js'
 import { useDynamicsSVG } from '../classes/dynamicsSVG.js'
-import { useInteractedWithPage } from '../classes/interactedWithPage.js'
-import { useEventListener } from '@vueuse/core'
+import { useAudioPlay } from '../classes/audioPlay.js'
 
 const gameStore = useGameStore()
-
-//const activeColumn = ref(Math.floor((gameStore.dimension.cols+1)/2))
-const activeColumn = ref(-1)   // start outside board
-
-const userInteractedWithPage = useInteractedWithPage()    // only play sounds when user has interacted
-
 const dynamicsSVG = useDynamicsSVG();
+const audio = useAudioPlay();
 
-const show = ref(true)
+const activeColumn = ref(Math.floor((gameStore.dimension.cols)/2))  // start in the middle of the board
 
 const columnStyle = computed(() => {
-    return {'width':(100/gameStore.dimension.cols) + '%'}
+  return {
+    'width':(100/gameStore.dimension.cols) + '%'
+  }
 })
 
 function insertDisc(columnIndex:number):void {
@@ -27,11 +24,6 @@ function insertDisc(columnIndex:number):void {
     gameStore.insertDisc(columnIndex);
   }
 }
-
-/*
-watch(gameStore.discs, () => {
-  console.log('hello')
-})*/
 
 useEventListener(document, 'keydown', (event) => {
   switch (event.key) {
@@ -62,7 +54,7 @@ useEventListener(document, 'keydown', (event) => {
   }
 })
 
-// Called when a new disc enters the game
+// Called when a new disc enters the game (which it does when it is dropped)
 function onDiscEnter(el:any, b:any) {
 
   dynamicsSVG.animateProperty({
@@ -77,14 +69,7 @@ function onDiscEnter(el:any, b:any) {
     }
   })
 
-  if ((userInteractedWithPage.value) && (!gameStore.muted)) {
-    window.setTimeout(() => {
-        var audio = new Audio('/sounds/coin-dropped.mp3');
-        audio.play();
-      }, 200
-    )
-
-  }
+  audio.playAfterTimeout('/sounds/coin-dropped.mp3', 200)
 }
 
 function onDiscLeave(el:any, b:any) {
@@ -101,14 +86,9 @@ function onDiscLeave(el:any, b:any) {
     }
   })
 
-  if ((userInteractedWithPage.value) && (!gameStore.muted)) {
-    window.setTimeout(() => {
-        var audio = new Audio('/sounds/suck.mp3');
-        audio.play();
-      }, 10
-    )
-  }
+  audio.play('/sounds/suck.mp3');
 }
+
 </script>
 
 <template>
