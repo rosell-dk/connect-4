@@ -1,4 +1,3 @@
-import { ref, watch, reactive } from 'vue'
 import { useInteractedWithPage } from './interactedWithPage.js'
 import { useGameStore } from '../stores/GameStore.js'
 
