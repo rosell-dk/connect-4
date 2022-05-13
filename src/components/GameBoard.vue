@@ -37,34 +37,39 @@ function insertDisc(columnIndex:number):void {
 }
 
 useEventListener(document, 'keydown', (event) => {
-  if (!gameStore.isKeyboardAllowdForCurrentPlayer()) {
-    return
-  }
-  switch (event.key) {
-    case 'ArrowLeft':
-      activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
-      break
-    case 'ArrowRight':
-      activeColumn.value = Math.min(activeColumn.value+1, gameStore.dimension.cols);
-      break
-    case 'ArrowDown':
-      if ((activeColumn.value >= 0) && (activeColumn.value < gameStore.dimension.cols)) {
-        insertDisc(activeColumn.value)
-      }
-      break
-    case 'ArrowUp':
-      gameStore.undoLastMove();
-      break
-    case 'm':
-      gameStore.muted = !gameStore.muted;
-      break
-  }
+  if (
+    gameStore.gameActive &&
+    gameStore.isKeyboardAllowdForCurrentPlayer() &&
+    document.activeElement == document.body
+  ) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        activeColumn.value = Math.max(activeColumn.value-1, -1);  // allow out of board
+        break
+      case 'ArrowRight':
+        activeColumn.value = Math.min(activeColumn.value+1, gameStore.dimension.cols);
+        break
+      case 'ArrowDown':
+        event.preventDefault();  // to prevent document scrolling
+        if ((activeColumn.value >= 0) && (activeColumn.value < gameStore.dimension.cols)) {
+          insertDisc(activeColumn.value)
+        }
+        break
+      case 'ArrowUp':
+        event.preventDefault();
+        gameStore.undoLastMove();
+        break
+      case 'm':
+        gameStore.muted = !gameStore.muted;
+        break
+    }
 
-  // Pressing digit drops it on the corresponding slot
-  let digitTest = /^[1-9]$/;
-  if (digitTest.test(event.key)) {
-    let colIndex = parseInt(event.key, 10) - 1
-    insertDisc(colIndex)
+    // Pressing digit drops it on the corresponding slot
+    let digitTest = /^[1-9]$/;
+    if (digitTest.test(event.key)) {
+      let colIndex = parseInt(event.key, 10) - 1
+      insertDisc(colIndex)
+    }
   }
 })
 

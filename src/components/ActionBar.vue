@@ -22,7 +22,8 @@ const inputMethods = [
 ]
 
 function onNewGameClick() {
-    //gameStore.$reset();
+    let activeElement:any = document.activeElement
+    activeElement.blur()  // Let go of focus
     gameStore.newGame()
 }
 
