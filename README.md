@@ -4,7 +4,7 @@ Connect 4 game, implemented in Vue 3
 I was challenged to implement a Connect-4 game in seven days, beginning from monday the 9th of May 2022.
 The game should have state persistence and undo functionality
 
-You can see the demo (day 5) [here](https://little-b.it/connect4/v1/)
+You can see the demo [here](https://little-b.it/connect4/deliverence/)
 
 ## Log:
 
@@ -19,6 +19,9 @@ The method for determining if the game is won is to examine the discs next to th
 
 For state persistence, I simply used the "persist" feature of Pinia.
 The *undo* functionality was implemented by maintaining a history of moves. Ie [4,2] would mean that the first disc was placed in column 4 and the second was placed in column 2. Removing a disc translates into popping the column index from history and removing the disc on the top of that row.
+
+Demo for [DAY 1](https://little-b.it/connect4/day1/)
+I have tagged the code each day. Here is the code for [day 1](https://github.com/rosell-dk/connect-4/tree/day1)
 
 ### Day 2: Quality
 Having a working game allowed me to turn to the quality. Quality of code and quality of the UI
