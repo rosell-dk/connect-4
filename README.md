@@ -87,9 +87,14 @@ These sounds could easily be recorded by myself. But they could probably also ea
 
 Uploaded a demo
 
+### Day 6-7: Weekend with family
 
+## Ideas for improvements
 
-## Other ideas
+*Code Quality*
+- The logic in the model (GameStore.js) has grown too big. It needs refactoring.
+
+*Features*
 - Mark the winning connection (ie by blinking)
 - Game settings: Board size
 - Redo
@@ -100,7 +105,8 @@ Uploaded a demo
 - Rule variation: [PopOut](https://en.wikipedia.org/wiki/Connect_Four)
 - Rule variation: Cylinder-Infinite Connect-Four
 - Rule variation: [Power up](https://en.wikipedia.org/wiki/Connect_Four)
-- Docker
-- [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)
 - Pan through history
 - Optionally only allow the player to undo his own moves
+
+*Performance*
+- [Compile without options api](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags)
