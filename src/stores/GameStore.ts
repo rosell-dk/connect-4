@@ -153,14 +153,6 @@ export const useGameStore = defineStore('GameStore', {
       return row;
     },
 
-    toggleWhosTurn():void {
-      if (this.whosTurn >= this.players.length) {
-        this.whosTurn = 1
-      } else {
-        this.whosTurn++
-      }
-    },
-
     // drop disc in column. Returns true on success, false otherwise
     insertDisc(col:number):boolean {
       let row = this.getNextAvailablePosition(col)
@@ -172,8 +164,11 @@ export const useGameStore = defineStore('GameStore', {
       this.history.push(col)
 
       this.checkIfWon(col, row)
-      this.toggleWhosTurn()
-
+      if (this.whosTurn >= this.players.length) {
+        this.whosTurn = 1
+      } else {
+        this.whosTurn++
+      }
       return true
     },
 
@@ -200,7 +195,11 @@ export const useGameStore = defineStore('GameStore', {
       this.removeDiscAtTopOfCol(col)
       this.whoWon = 0
       this.gameActive = true
-      this.toggleWhosTurn()
+      if (this.whosTurn == 1) {
+        this.whosTurn = this.players.length
+      } else {
+        this.whosTurn--
+      }
     },
 
     // Checks if a cell is part of a wining sequence
